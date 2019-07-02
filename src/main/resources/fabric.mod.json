@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "oysters",
+  "version": "${version}",
+
+  "name": "Oysters",
+  "description": "Resource Generation Mod Using Oysters",
+  "authors": [
+    "KtBoogey"
+  ],
+  "contact": {
+    "homepage": "https://github.com/kylertlove/Oysters",
+    "sources": "https://github.com/kylertlove/Oysters"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/oysters/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.nerds.oysters.Oysters"
+    ]
+  },
+  "mixins": [
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}
