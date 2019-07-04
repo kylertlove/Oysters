@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "net.nerds.oysters.Oysters"
+    ],
+    "client": [
+      "net.nerds.oysters.OystersClient"
     ]
   },
   "mixins": [

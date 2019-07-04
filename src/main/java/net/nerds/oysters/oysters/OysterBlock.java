@@ -1,7 +1,11 @@
 package net.nerds.oysters.oysters;
 
+import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityContext;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
@@ -9,24 +13,30 @@ import net.minecraft.state.StateFactory;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.state.property.Property;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.ViewableWorld;
+import net.minecraft.world.World;
 
-public class OysterBlock extends Block implements Waterloggable {
+public class OysterBlock extends Block implements Waterloggable, BlockEntityProvider {
 
-    private VoxelShape voxelShape = Block.createCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 4.0D, 13.0D);
+    private VoxelShape voxelShape = Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
-    public OysterBlock(Settings blockSettings) {
-        super(blockSettings);
+    public OysterBlock() {
+        super(FabricBlockSettings.of(Material.METAL)
+                .breakByHand(true)
+                .resistance(2.0f)
+                .build());
+
         this.setDefaultState(getStateFactory().getDefaultState()
                 .with(WATERLOGGED, true)
                 .with(FACING, Direction.NORTH));
@@ -47,6 +57,11 @@ public class OysterBlock extends Block implements Waterloggable {
     }
 
     @Override
+    public boolean canPlaceAt(BlockState blockState_1, ViewableWorld viewableWorld_1, BlockPos blockPos_1) {
+        return viewableWorld_1.getBlockState(blockPos_1.down()).getBlock() == Blocks.SAND;
+    }
+
+    @Override
     public BlockState rotate(BlockState blockState, BlockRotation rotation) {
         return blockState.with(FACING, rotation.rotate(blockState.get(FACING)));
     }
@@ -64,5 +79,18 @@ public class OysterBlock extends Block implements Waterloggable {
     @Override
     protected void appendProperties(StateFactory.Builder<Block, BlockState> stateBuilder) {
         stateBuilder.add(WATERLOGGED, FACING);
+    }
+
+    @Override
+    public BlockEntity createBlockEntity(BlockView blockView) {
+        return new OysterEntity(OystersManager.OysterEntityType);
+    }
+
+    @Override
+    public boolean activate(BlockState state, World world, BlockPos blockPos, PlayerEntity player, Hand hand, BlockHitResult blockHitResult) {
+        if (!world.isClient) {
+            ContainerProviderRegistry.INSTANCE.openContainer(OystersManager.oysterContainerIdenifer, player, buf -> buf.writeBlockPos(blockPos));
+        }
+        return true;
     }
 }

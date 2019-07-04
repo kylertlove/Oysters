@@ -16,6 +16,6 @@ public class Oysters implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		OystersManager.buildOysters();
+		OystersManager.init();
 	}
 }

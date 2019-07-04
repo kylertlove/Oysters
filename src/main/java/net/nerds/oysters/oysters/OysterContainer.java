@@ -1,0 +1,45 @@
+package net.nerds.oysters.oysters;
+
+import net.minecraft.container.Container;
+import net.minecraft.container.Slot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.world.World;
+
+public class OysterContainer extends Container {
+
+    public final Inventory inventory;
+    public final PlayerInventory playerInventory;
+    public final World world;
+
+    public OysterContainer(int syncId, PlayerInventory playerInventory, Inventory inventory ) {
+        super(null, syncId);
+        this.inventory = inventory;
+        this.playerInventory = playerInventory;
+        this.world = playerInventory.player.world;
+
+        //Oyster Inventory
+        this.addSlot(new Slot(inventory, 0, 80, 33));
+
+        //player inventory
+        int playerInvIndex;
+        for(playerInvIndex = 0; playerInvIndex < 3; ++playerInvIndex) {
+            for(int var4 = 0; var4 < 9; ++var4) {
+                this.addSlot(new Slot(playerInventory, var4 + playerInvIndex * 9 + 9, 8 + var4 * 18, 65 + playerInvIndex * 18));
+            }
+        }
+        for(playerInvIndex = 0; playerInvIndex < 9; ++playerInvIndex) {
+            this.addSlot(new Slot(playerInventory, playerInvIndex, 8 + playerInvIndex * 18, 123));
+        }
+    }
+
+    @Override
+    public boolean canUse(PlayerEntity playerEntity) {
+        return this.inventory.canPlayerUseInv(playerEntity);
+    }
+
+    public Inventory getInventory() {
+        return this.inventory;
+    }
+}
