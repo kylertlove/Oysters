@@ -10,38 +10,41 @@ import net.minecraft.util.registry.Registry;
 import net.nerds.oysters.Oysters;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class OystersManager {
 
-    public static OysterBlock PLAIN_OYSTER = new OysterBlock();
-    public static BlockEntityType<BlockEntity> OysterEntityType;
-    public static final Identifier oysterContainerIdenifer = new Identifier(Oysters.MODID, "oyster_container");
+    public static Map<Identifier, BlockEntityType<BlockEntity>> oysterEntityTypeMap = new HashMap<>();
 
     public static void init() {
-        buildOysterEntity();
-        initGui();
-        buildOysters();
+        buildOysterEntityTypeMap();
+        Arrays.stream(OysterBreed.values())
+                .forEach(oysterBreed -> {
+                    //Entity builds
+                    oysterEntityTypeMap.put(oysterBreed.getIdentifier(),
+                            Registry.register(Registry.BLOCK_ENTITY, oysterBreed.getIdentifier(),
+                                    BlockEntityType.Builder.create((Supplier<BlockEntity>) () -> {
+                                                return new OysterEntity(oysterEntityTypeMap.get(oysterBreed.getIdentifier()));
+                                            },
+                                            oysterBreed.getOysterBlock()).build(null)));
+
+                    //Gui builds
+                    ContainerProviderRegistry.INSTANCE.registerFactory(oysterBreed.getContainerIdentifier(), (syncid, identifier, player, buf) -> {
+                        return new OysterContainer(syncid, player.inventory, (OysterEntity) player.world.getBlockEntity(buf.readBlockPos()));
+                    });
+
+                    //block/Item builds
+                    Registry.register(Registry.BLOCK, oysterBreed.getIdentifier(), oysterBreed.getOysterBlock());
+                    Registry.register(Registry.ITEM,
+                            oysterBreed.getIdentifier(),
+                            oysterBreed.getOysterBlockItem());
+                });
+    }
+    private static void buildOysterEntityTypeMap() {
+        Arrays.stream(OysterBreed.values())
+                .forEach(oysterBreed -> oysterEntityTypeMap.put(oysterBreed.getIdentifier(), null));
     }
 
-    public static void buildOysters() {
-        Registry.register(Registry.BLOCK, new Identifier(Oysters.MODID, "plain_oyster"), PLAIN_OYSTER);
-        Registry.register(Registry.ITEM,
-                new Identifier(Oysters.MODID, "plain_oyster"),
-                new BlockItem(PLAIN_OYSTER, new Item.Settings().group(Oysters.oysterGroup)));
-    }
-
-    public static void buildOysterEntity() {
-
-        OysterEntityType = Registry.register(Registry.BLOCK_ENTITY, new Identifier(Oysters.MODID, "plain_oyster"),
-                BlockEntityType.Builder.create((Supplier<BlockEntity>) () -> {
-                    return new OysterEntity(OysterEntityType);
-                }, PLAIN_OYSTER).build(null));
-    }
-
-    public static void initGui() {
-        ContainerProviderRegistry.INSTANCE.registerFactory(oysterContainerIdenifer, (syncid, identifier, player, buf) -> {
-            return new OysterContainer(syncid, player.inventory, (OysterEntity) player.world.getBlockEntity(buf.readBlockPos()));
-        });
-    }
 }

@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=south": { "model": "oysters:block/bone_meal_oyster" },
+		"facing=west": { "model": "oysters:block/bone_meal_oyster", "y": 90 },
+		"facing=north": { "model": "oysters:block/bone_meal_oyster", "y": 180 },
+		"facing=east": { "model": "oysters:block/bone_meal_oyster", "y": 270 }
+	}
+}

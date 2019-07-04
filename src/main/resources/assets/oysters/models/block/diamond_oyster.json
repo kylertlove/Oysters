@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "oysters:blocks/plain_oyster",
-		"particle": "oysters:blocks/plain_oyster"
+		"0": "oysters:blocks/diamond_oyster",
+		"particle": "oysters:blocks/diamond_oyster"
 	},
 	"elements": [
 		{

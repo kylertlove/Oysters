@@ -1,7 +1,7 @@
 package net.nerds.oysters.oysters;
 
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.nerds.oysters.Oysters;
 
@@ -18,13 +18,16 @@ public enum OysterBreed {
     private Identifier identifier;
     private Identifier containerIdentifier;
     private OysterBlock oysterBlock;
-    public BlockEntityType<BlockEntity> blockEntityType;
+    private Item oysterBlockItem;
 
-    private OysterBreed(String name, String containerName) {
+    OysterBreed(String name, String containerName) {
         identifier = new Identifier(Oysters.MODID, name);
         containerIdentifier = new Identifier(Oysters.MODID, containerName);
-        oysterBlock = new OysterBlock();
+        oysterBlock = new OysterBlock(identifier);
+        oysterBlockItem = new BlockItem(getOysterBlock(), new Item.Settings().group(Oysters.oysterGroup).maxCount(8));
     }
+
+    public String getName() { return identifier.getPath(); }
 
     public Identifier getIdentifier() {
         return identifier;
@@ -38,7 +41,5 @@ public enum OysterBreed {
         return containerIdentifier;
     }
 
-    public BlockEntityType<BlockEntity> getBlockEntityType() {
-        return blockEntityType;
-    }
+    public Item getOysterBlockItem() { return oysterBlockItem; }
 }
