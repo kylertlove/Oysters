@@ -41,7 +41,6 @@ public class OysterEntity extends BlockEntity implements Tickable, SidedInventor
         return nbt;
     }
 
-
     @Override
     public int[] getInvAvailableSlots(Direction direction) {
         return new int[1];

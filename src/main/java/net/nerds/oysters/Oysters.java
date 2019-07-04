@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.nerds.oysters.oysters.OysterBreed;
 import net.nerds.oysters.oysters.OystersManager;
+import net.nerds.oysters.pearls.OysterPearlManager;
 
 public class Oysters implements ModInitializer {
 
@@ -17,5 +18,6 @@ public class Oysters implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		OystersManager.init();
+		OysterPearlManager.init();
 	}
 }
