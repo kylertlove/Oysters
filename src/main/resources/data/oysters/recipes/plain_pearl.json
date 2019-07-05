@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "bbb",
+    "bbb",
+    "bbb"
+  ],
+  "key": {
+    "b": {
+      "item": "minecraft:nautilus_shell"
+    }
+  },
+  "result": {
+    "item": "oysters:plain_oyster"
+  }
+}

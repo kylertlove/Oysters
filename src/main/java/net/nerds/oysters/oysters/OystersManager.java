@@ -3,11 +3,8 @@ package net.nerds.oysters.oysters;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.nerds.oysters.Oysters;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -49,14 +46,5 @@ public class OystersManager {
     private static void buildOysterEntityTypeMap() {
         Arrays.stream(OysterBreed.values())
                 .forEach(oysterBreed -> oysterEntityTypeMap.put(oysterBreed.getIdentifier(), null));
-    }
-
-    public static OysterBreed getOysterBreedByIdentifierPath(String path) {
-        return Arrays.stream(OysterBreed.values())
-                .filter(oysterBreed -> {
-                    System.out.println(path + " : " + oysterBreed.getName());
-                    return oysterBreed.getName().equalsIgnoreCase(path);
-                })
-                .findFirst().get();
     }
 }

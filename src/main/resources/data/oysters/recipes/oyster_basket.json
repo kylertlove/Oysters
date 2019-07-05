@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "bsb",
+    "bsb",
+    "b b"
+  ],
+  "key": {
+    "b": {
+      "item": "minecraft:stick"
+    },
+    "s": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "oysters:oyster_basket"
+  }
+}

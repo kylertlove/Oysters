@@ -1,0 +1,20 @@
+{
+  "itemGroup.oysters.oysters": "Oysters",
+  "item.oysters.plain_pearl": "Pearl",
+  "item.oysters.bone_meal_pearl": "Bone Meal Pearl",
+  "item.oysters.coal_pearl": "Coal Pearl",
+  "item.oysters.iron_pearl": "Iron Pearl",
+  "item.oysters.gold_pearl": "Gold Pearl",
+  "item.oysters.lapis_pearl": "Lapis Lazuli Pearl",
+  "item.oysters.diamond_pearl": "Diamond Pearl",
+  "item.oysters.emerald_pearl": "Emerald Pearl",
+  "block.oysters.plain_oyster": "Oyster",
+  "block.oysters.bone_meal_oyster": "Bone Meal Oyster",
+  "block.oysters.coal_oyster": "Coal Oyster",
+  "block.oysters.iron_oyster": "Iron Oyster",
+  "block.oysters.gold_oyster": "Gold Oyster",
+  "block.oysters.lapis_oyster": "Lapis Lazuli Oyster",
+  "block.oysters.diamond_oyster": "Diamond Oyster",
+  "block.oysters.emerald_oyster": "Emerald Oyster",
+  "block.oysters.oyster_basket": "Oyster Basket"
+}

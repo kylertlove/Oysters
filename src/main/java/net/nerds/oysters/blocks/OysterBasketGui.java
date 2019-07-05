@@ -1,4 +1,4 @@
-package net.nerds.oysters.oysters;
+package net.nerds.oysters.blocks;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.fabricmc.api.EnvType;
@@ -9,17 +9,18 @@ import net.minecraft.util.Identifier;
 import net.nerds.oysters.Oysters;
 
 @Environment(EnvType.CLIENT)
-public class OysterGui extends AbstractContainerScreen {
+public class OysterBasketGui extends AbstractContainerScreen {
 
-    public Identifier fishGui = new Identifier(Oysters.MODID, "textures/gui/oyster_gui.png");
-    public OysterEntity tile;
-    private String containerLabel;
+    public Identifier fishGui = new Identifier(Oysters.MODID, "textures/gui/oyster_basket_gui.png");
+    public OysterBasketEntity tile;
+    private String containerLabel = "";
+    private final int rows = 5;
 
-    public OysterGui(OysterEntity oysterEntity, OysterContainer oysterContainer, String containerLabel, String textComponent) {
-        super(oysterContainer, oysterContainer.playerInventory, new TranslatableText(textComponent));
-        this.tile = oysterEntity;
-        this.containerHeight = 146;
-        this.containerLabel = new TranslatableText(textComponent).asString();
+    public OysterBasketGui(OysterBasketEntity fishTrapBlockEntity, OysterBasketContainer fishTrapContainer, String containerLabel, String textComponent) {
+        super(fishTrapContainer, fishTrapContainer.playerInventory, new TranslatableText(textComponent));
+        this.tile = fishTrapBlockEntity;
+        this.containerHeight = 133 + this.rows * 18;
+        this.containerLabel = new TranslatableText(containerLabel).asString();
     }
 
     @Override

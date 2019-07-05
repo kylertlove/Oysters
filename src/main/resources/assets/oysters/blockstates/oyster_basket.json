@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=south": { "model": "oysters:block/oyster_basket" },
+		"facing=west": { "model": "oysters:block/oyster_basket", "y": 90 },
+		"facing=north": { "model": "oysters:block/oyster_basket", "y": 180 },
+		"facing=east": { "model": "oysters:block/oyster_basket", "y": 270 }
+	}
+}

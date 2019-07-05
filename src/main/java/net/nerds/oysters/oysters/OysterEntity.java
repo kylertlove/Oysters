@@ -18,7 +18,7 @@ public class OysterEntity extends BlockEntity implements Tickable, SidedInventor
     public DefaultedList<ItemStack> inventory;
     private OysterBreed oysterBreed;
     private long ticksElapased = 0;
-    private long tickCheck = 100;
+    private long tickCheck = 1200;
 
     public OysterEntity(BlockEntityType<?> blockEntityType, OysterBreed oysterBreed) {
         super(blockEntityType);
@@ -28,21 +28,26 @@ public class OysterEntity extends BlockEntity implements Tickable, SidedInventor
 
     @Override
     public void tick() {
-        if(tickCheck <= ticksElapased) {
-
-            ItemStack itemStack = new ItemStack(oysterBreed.getOysterPearl());
-                if(inventory.get(0).isEmpty()) {
-                    inventory.set(0, itemStack);
-                    markDirty();
-                } else if(inventory.get(0).isItemEqual(itemStack) &&
-                        (inventory.get(0).getCount() + itemStack.getCount() < 64) &&
-                        itemStack.isStackable()) {
-                    inventory.set(0, new ItemStack(itemStack.getItem(), itemStack.getCount() + inventory.get(0).getCount()));
-                    markDirty();
-                }
+        if (tickCheck <= ticksElapased) {
+            spawnPearl();
             ticksElapased = 0;
         } else {
             ticksElapased++;
+        }
+    }
+
+    private void spawnPearl() {
+        if (!world.isClient) {
+            ItemStack itemStack = new ItemStack(oysterBreed.getOysterPearl());
+            if (inventory.get(0).isEmpty()) {
+                inventory.set(0, itemStack);
+                markDirty();
+            } else if (inventory.get(0).isItemEqual(itemStack) &&
+                    (inventory.get(0).getCount() + itemStack.getCount() <= 64) &&
+                    itemStack.isStackable()) {
+                inventory.set(0, new ItemStack(itemStack.getItem(), itemStack.getCount() + inventory.get(0).getCount()));
+                markDirty();
+            }
         }
     }
 
@@ -91,8 +96,8 @@ public class OysterEntity extends BlockEntity implements Tickable, SidedInventor
             if (!var1.hasNext()) {
                 return true;
             }
-            itemStack_1 = (ItemStack)var1.next();
-        } while(itemStack_1.isEmpty());
+            itemStack_1 = (ItemStack) var1.next();
+        } while (itemStack_1.isEmpty());
         return false;
     }
 
@@ -122,7 +127,7 @@ public class OysterEntity extends BlockEntity implements Tickable, SidedInventor
         if (this.world.getBlockEntity(this.pos) != this) {
             return false;
         } else {
-            return playerEntity.squaredDistanceTo((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
+            return playerEntity.squaredDistanceTo((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
         }
     }
 
