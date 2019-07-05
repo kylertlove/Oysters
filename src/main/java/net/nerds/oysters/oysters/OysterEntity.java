@@ -16,15 +16,34 @@ import java.util.Iterator;
 public class OysterEntity extends BlockEntity implements Tickable, SidedInventory {
 
     public DefaultedList<ItemStack> inventory;
+    private OysterBreed oysterBreed;
+    private long ticksElapased = 0;
+    private long tickCheck = 100;
 
-    public OysterEntity(BlockEntityType<?> blockEntityType) {
+    public OysterEntity(BlockEntityType<?> blockEntityType, OysterBreed oysterBreed) {
         super(blockEntityType);
         inventory = DefaultedList.create(1, ItemStack.EMPTY);
+        this.oysterBreed = oysterBreed;
     }
 
     @Override
     public void tick() {
+        if(tickCheck <= ticksElapased) {
 
+            ItemStack itemStack = new ItemStack(oysterBreed.getOysterPearl());
+                if(inventory.get(0).isEmpty()) {
+                    inventory.set(0, itemStack);
+                    markDirty();
+                } else if(inventory.get(0).isItemEqual(itemStack) &&
+                        (inventory.get(0).getCount() + itemStack.getCount() < 64) &&
+                        itemStack.isStackable()) {
+                    inventory.set(0, new ItemStack(itemStack.getItem(), itemStack.getCount() + inventory.get(0).getCount()));
+                    markDirty();
+                }
+            ticksElapased = 0;
+        } else {
+            ticksElapased++;
+        }
     }
 
     @Override

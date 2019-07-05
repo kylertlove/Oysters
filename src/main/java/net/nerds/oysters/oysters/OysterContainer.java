@@ -5,7 +5,9 @@ import net.minecraft.container.Slot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.nerds.oysters.Utils.OutputSlot;
 
 public class OysterContainer extends Container {
 
@@ -20,7 +22,7 @@ public class OysterContainer extends Container {
         this.world = playerInventory.player.world;
 
         //Oyster Inventory
-        this.addSlot(new Slot(inventory, 0, 80, 33));
+        this.addSlot(new OutputSlot(inventory, 0, 80, 33));
 
         //player inventory
         int playerInvIndex;
@@ -31,6 +33,25 @@ public class OysterContainer extends Container {
         }
         for(playerInvIndex = 0; playerInvIndex < 9; ++playerInvIndex) {
             this.addSlot(new Slot(playerInventory, playerInvIndex, 8 + playerInvIndex * 18, 123));
+        }
+    }
+
+    @Override
+    public ItemStack transferSlot(PlayerEntity player, int slotIndex) {
+        Slot initSlot = this.slotList.get(slotIndex);
+        if (initSlot.getStack() == ItemStack.EMPTY) {
+            return ItemStack.EMPTY;
+        }
+        ItemStack originalItem = initSlot.getStack().copy();
+        if (initSlot.inventory == player.inventory) {
+            return ItemStack.EMPTY;
+        } else {
+            if(playerInventory.insertStack(originalItem)) {
+                initSlot.setStack(ItemStack.EMPTY);
+                return originalItem;
+            } else {
+                return ItemStack.EMPTY;
+            }
         }
     }
 

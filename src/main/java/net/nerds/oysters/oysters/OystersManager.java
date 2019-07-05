@@ -22,11 +22,15 @@ public class OystersManager {
         buildOysterEntityTypeMap();
         Arrays.stream(OysterBreed.values())
                 .forEach(oysterBreed -> {
+                    //Identify the Breed in the Oyster Block
+                    //to avoid the race condition of setting it in OysterBreed Constructor
+                    oysterBreed.getOysterBlock().setOysterBreed(oysterBreed);
+
                     //Entity builds
                     oysterEntityTypeMap.put(oysterBreed.getIdentifier(),
                             Registry.register(Registry.BLOCK_ENTITY, oysterBreed.getIdentifier(),
                                     BlockEntityType.Builder.create((Supplier<BlockEntity>) () -> {
-                                                return new OysterEntity(oysterEntityTypeMap.get(oysterBreed.getIdentifier()));
+                                                return new OysterEntity(oysterEntityTypeMap.get(oysterBreed.getIdentifier()), oysterBreed);
                                             },
                                             oysterBreed.getOysterBlock()).build(null)));
 
@@ -47,4 +51,12 @@ public class OystersManager {
                 .forEach(oysterBreed -> oysterEntityTypeMap.put(oysterBreed.getIdentifier(), null));
     }
 
+    public static OysterBreed getOysterBreedByIdentifierPath(String path) {
+        return Arrays.stream(OysterBreed.values())
+                .filter(oysterBreed -> {
+                    System.out.println(path + " : " + oysterBreed.getName());
+                    return oysterBreed.getName().equalsIgnoreCase(path);
+                })
+                .findFirst().get();
+    }
 }

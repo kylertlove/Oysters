@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -18,7 +17,6 @@ import net.minecraft.tag.FluidTags;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -27,24 +25,25 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.ViewableWorld;
 import net.minecraft.world.World;
 
-import java.util.Arrays;
-
 public class OysterBlock extends Block implements Waterloggable, BlockEntityProvider {
 
     private VoxelShape voxelShape = Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    private Identifier identifier;
+    private OysterBreed oysterBreed;
 
-    public OysterBlock(Identifier identifier) {
+    public OysterBlock() {
         super(FabricBlockSettings.of(Material.METAL)
                 .breakByHand(true)
                 .resistance(2.0f)
                 .build());
-        this.identifier = identifier;
         this.setDefaultState(getStateFactory().getDefaultState()
                 .with(WATERLOGGED, true)
                 .with(FACING, Direction.NORTH));
+    }
+
+    public void setOysterBreed(OysterBreed breed) {
+        this.oysterBreed = breed;
     }
 
     @Override
@@ -88,20 +87,16 @@ public class OysterBlock extends Block implements Waterloggable, BlockEntityProv
 
     @Override
     public BlockEntity createBlockEntity(BlockView blockView) {
-        return new OysterEntity(OystersManager.oysterEntityTypeMap.get(identifier));
+        return new OysterEntity(OystersManager.oysterEntityTypeMap.get(oysterBreed.getIdentifier()), oysterBreed);
     }
 
     @Override
     public boolean activate(BlockState state, World world, BlockPos blockPos, PlayerEntity player, Hand hand, BlockHitResult blockHitResult) {
         if (!world.isClient) {
-            ContainerProviderRegistry.INSTANCE.openContainer(getContainerIdentifer(), player, buf -> buf.writeBlockPos(blockPos));
+            ContainerProviderRegistry.INSTANCE.openContainer(
+                    oysterBreed.getContainerIdentifier(),
+                    player, buf -> buf.writeBlockPos(blockPos));
         }
         return true;
-    }
-
-    private Identifier getContainerIdentifer() {
-        return Arrays.stream(OysterBreed.values())
-                .filter(oysterBreed -> oysterBreed.getName().equalsIgnoreCase(identifier.getPath()))
-                .findFirst().get().getContainerIdentifier();
     }
 }
