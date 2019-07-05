@@ -1,6 +1,8 @@
 # Oysters
 Minecraft Resource Generation Mod with Oysters
 
+[mod download](https://www.curseforge.com/minecraft/mc-mods/oysters)
+
 Brainstorming Outline:
 * Oysters generate in certain biomes. probably warm and on sand only
 * oysters create pearls.  resource oysters create resource pearls
