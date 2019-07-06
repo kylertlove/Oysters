@@ -43,7 +43,7 @@ public class OysterEntity extends BlockEntity implements Tickable, SidedInventor
                 inventory.set(0, itemStack);
                 markDirty();
             } else if (inventory.get(0).isItemEqual(itemStack) &&
-                    (inventory.get(0).getCount() + itemStack.getCount() <= 64) &&
+                    (inventory.get(0).getCount() + itemStack.getCount() <= itemStack.getMaxCount()) &&
                     itemStack.isStackable()) {
                 inventory.set(0, new ItemStack(itemStack.getItem(), itemStack.getCount() + inventory.get(0).getCount()));
                 markDirty();
