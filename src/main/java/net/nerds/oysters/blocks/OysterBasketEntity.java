@@ -75,9 +75,13 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
 
     private void attemptToBreedOysters() {
         if (!world.isClient) {
-            if (!inventory.get(0).isEmpty()) {
-                if (rngForBreeding()) {
+            //there are oysters and there is more than one
+            if (!inventory.get(0).isEmpty() && inventory.get(0).getCount() > 1) {
+                //pray to rng gods for blessings
+                if (rngForBreeding(inventory.get(0).getCount())) {
+                    //get the Oyster Breed from the spawning inventory
                     OysterBreed oysterBreed = OysterBreedUtility.getBreedByBlockItem(inventory.get(0).getItem());
+                    //is this attempting to mutate the oyster
                     if (!inventory.get(1).isEmpty()) {
                         //there is a shell and a resource... get the new shell of that resource
                         OysterBreed newBreed = Arrays.stream(OysterBreed.values())
@@ -102,9 +106,10 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
         }
     }
 
-    private boolean rngForBreeding() {
+    private boolean rngForBreeding(int oysterCount) {
         float range = world.random.nextInt(100);
-        return this.canBreedChance >= range;
+        //breed chance + additional oysters = ~ 4 - 10 % chance of breeding
+        return (this.canBreedChance + (oysterCount - 2)) >= range;
     }
 
     @Override
