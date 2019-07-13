@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "bbb",
+    "bbb",
+    "bbb"
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:redstone_pearl"
+    }
+  },
+  "result": {
+    "item": "minecraft:redstone",
+    "count": 4
+  }
+}

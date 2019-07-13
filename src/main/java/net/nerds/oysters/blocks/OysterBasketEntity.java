@@ -7,6 +7,7 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.Direction;
@@ -22,7 +23,7 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
     private int maxStorage = 47;
     public DefaultedList<ItemStack> inventory;
     private long tickCounter = 0;
-    private long tickCheck = 1200;
+    private double tickCheck = 1200;
     private long tickBreedCheck = 1200;
     private long tickBreedCounter = 0;
     private float canBreedChance = 4;
@@ -34,7 +35,7 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
 
     @Override
     public void tick() {
-        if (tickCounter >= tickCheck) {
+        if (tickCounter >= getPearlGenTimer()) {
             farmOysters();
             tickCounter = 0;
         }
@@ -46,8 +47,17 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
         tickBreedCounter++;
     }
 
+    //more oysters means faster pearl generation
+    private double getPearlGenTimer() {
+        if(inventory.get(0).getCount() > 0) {
+            //tickcheck / (count * .6) so that its not a straight cut-in-half time for each oyster added
+            return tickCheck / ((double)inventory.get(0).getCount() * .6);
+        }
+        return tickCheck;
+    }
+
     private void farmOysters() {
-        if (!world.isClient) {
+        if (!world.isClient && world.getBlockState(this.pos).get(Properties.WATERLOGGED)) {
             if (!inventory.get(0).isEmpty()) {
                 OysterBreed oysterBreed = OysterBreedUtility.getBreedByBlockItem(inventory.get(0).getItem());
                 ItemStack itemStack = new ItemStack(oysterBreed.getOysterPearl());
@@ -74,7 +84,7 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
     }
 
     private void attemptToBreedOysters() {
-        if (!world.isClient) {
+        if (!world.isClient && world.getBlockState(this.pos).get(Properties.WATERLOGGED)) {
             //there are oysters and there is more than one
             if (!inventory.get(0).isEmpty() && inventory.get(0).getCount() > 1) {
                 //pray to rng gods for blessings

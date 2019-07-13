@@ -1,5 +1,7 @@
 package net.nerds.oysters.oysters;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -7,6 +9,7 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.Direction;
@@ -37,7 +40,7 @@ public class OysterEntity extends BlockEntity implements Tickable, SidedInventor
     }
 
     private void spawnPearl() {
-        if (!world.isClient) {
+        if (!world.isClient && world.getBlockState(this.pos).get(Properties.WATERLOGGED)) {
             ItemStack itemStack = new ItemStack(oysterBreed.getOysterPearl());
             if (inventory.get(0).isEmpty()) {
                 inventory.set(0, itemStack);

@@ -8,6 +8,9 @@
   "item.oysters.lapis_pearl": "Lapis Lazuli Pearl",
   "item.oysters.diamond_pearl": "Diamond Pearl",
   "item.oysters.emerald_pearl": "Emerald Pearl",
+  "item.oysters.redstone_pearl": "Redstone Pearl",
+  "item.oysters.glowstone_pearl": "Glowstone Pearl",
+  "item.oysters.ender_pearl_pearl": "Ender Pearl... Pearl?",
   "block.oysters.plain_oyster": "Oyster",
   "block.oysters.bone_meal_oyster": "Bone Meal Oyster",
   "block.oysters.coal_oyster": "Coal Oyster",
@@ -16,5 +19,8 @@
   "block.oysters.lapis_oyster": "Lapis Lazuli Oyster",
   "block.oysters.diamond_oyster": "Diamond Oyster",
   "block.oysters.emerald_oyster": "Emerald Oyster",
+  "block.oysters.glowstone_oyster": "Glowstone Oyster",
+  "block.oysters.redstone_oyster": "Redstone Oyster",
+  "block.oysters.ender_pearl_oyster": "Ender Pearl Oyster",
   "block.oysters.oyster_basket": "Oyster Basket"
 }

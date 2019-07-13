@@ -14,7 +14,10 @@ public enum OysterBreed {
     GOLD("gold_oyster", "gold_oyster_container", "gold_pearl", Items.GOLD_INGOT),
     DIAMOND("diamond_oyster", "diamond_oyster_container", "diamond_pearl", Items.DIAMOND),
     LAPIS("lapis_oyster", "lapis_oyster_container", "lapis_pearl", Items.LAPIS_LAZULI),
-    EMERALD("emerald_oyster", "emerald_oyster_container", "emerald_pearl", Items.EMERALD);
+    EMERALD("emerald_oyster", "emerald_oyster_container", "emerald_pearl", Items.EMERALD),
+    REDSTONE("redstone_oyster", "redstone_oyster_container", "redstone_pearl", Items.REDSTONE),
+    GLOWSTONE("glowstone_oyster", "glowstone_oyster_container", "glowstone_pearl", Items.GLOWSTONE_DUST),
+    ENDER_PEARL("ender_pearl_oyster", "ender_pearl_oyster_container", "ender_pearl_pearl", Items.ENDER_PEARL);
 
     private Identifier identifier;
     private Identifier containerIdentifier;

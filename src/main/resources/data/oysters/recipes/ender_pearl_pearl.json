@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "bbb",
+    "bbb",
+    "bbb"
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:ender_pearl_pearl"
+    }
+  },
+  "result": {
+    "item": "minecraft:ender_pearl",
+    "count": 1
+  }
+}
