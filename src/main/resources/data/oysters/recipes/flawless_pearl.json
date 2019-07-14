@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "bbb",
+    "bbb",
+    "bbb"
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:clean_pearl"
+    }
+  },
+  "result": {
+    "item": "oysters:flawless_pearl"
+  }
+}

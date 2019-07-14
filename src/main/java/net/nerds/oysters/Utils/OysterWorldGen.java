@@ -13,7 +13,7 @@ public class OysterWorldGen {
         for (Biome biome : Registry.BIOME) {
             if (biome.getCategory() == Biome.Category.OCEAN) {
                 biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(
-                        new OysterGenerationFeature(DefaultFeatureConfig::deserialize, OysterBreed.PLAIN.getOysterBlock().getDefaultState()),
+                        new OysterGenerationFeature(DefaultFeatureConfig::deserialize, OysterBreed.BLEMISHED.getOysterBlock().getDefaultState()),
                         FeatureConfig.DEFAULT,
                         Decorator.COUNT_HEIGHTMAP_DOUBLE,
                         new CountDecoratorConfig(1)

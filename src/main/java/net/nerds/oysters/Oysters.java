@@ -15,7 +15,7 @@ public class Oysters implements ModInitializer {
 
 	public static String MODID = "oysters";
 	public static ItemGroup oysterGroup = FabricItemGroupBuilder
-			.build(new Identifier(MODID, MODID), () -> new ItemStack(OysterBreed.PLAIN.getOysterBlockItem()));
+			.build(new Identifier(MODID, MODID), () -> new ItemStack(OysterBreed.BLEMISHED.getOysterBlockItem()));
 
 	@Override
 	public void onInitialize() {

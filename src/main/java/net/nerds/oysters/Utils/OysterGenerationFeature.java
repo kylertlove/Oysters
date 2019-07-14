@@ -29,7 +29,7 @@ public class OysterGenerationFeature extends WildCropFeature  {
         int int_4 = random.nextInt(8) - random.nextInt(8);
         int int_5 = world.getTop(Heightmap.Type.OCEAN_FLOOR, pos.getX() + int_3, pos.getZ() + int_4);
         BlockPos blockPos_2 = new BlockPos(pos.getX() + int_3, int_5, pos.getZ() + int_4);
-        BlockState blockState = OysterBreed.PLAIN.getOysterBlock().getDefaultState();
+        BlockState blockState = OysterBreed.BLEMISHED.getOysterBlock().getDefaultState();
         if (world.getBlockState(blockPos_2).getBlock() == Blocks.WATER && blockState.canPlaceAt(world, blockPos_2)) {
             world.setBlockState(blockPos_2, blockState, 2);
             placed += 2;
