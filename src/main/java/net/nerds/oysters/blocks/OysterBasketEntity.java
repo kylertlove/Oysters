@@ -11,7 +11,9 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.Direction;
+import net.nerds.oysters.Oysters;
 import net.nerds.oysters.Utils.OysterBreedUtility;
+import net.nerds.oysters.Utils.OysterConfigValues;
 import net.nerds.oysters.oysters.OysterBlockItem;
 import net.nerds.oysters.oysters.OysterBreed;
 
@@ -22,28 +24,31 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
 
     private int maxStorage = 47;
     public DefaultedList<ItemStack> inventory;
-    private long tickCounter = 0;
-    private double tickCheck = 1200;
-    private long tickBreedCheck = 1200;
+    private long pearlGenCounter = 0;
+    private double pearlGenCheck;
+    private long pearlMutateCheck;
     private long tickBreedCounter = 0;
-    private float canBreedChance = 4;
+    private float canBreedChance;
 
     public OysterBasketEntity(BlockEntityType blockEntityType) {
         super(blockEntityType);
         inventory = DefaultedList.create(maxStorage, ItemStack.EMPTY);
+        pearlGenCheck = Oysters.oystersConfig.getProperty(OysterConfigValues.BASE_BASKET_PEARL_GEN_TIME);
+        pearlMutateCheck = Oysters.oystersConfig.getProperty(OysterConfigValues.BASE_BASKET_MUTATE_TIME);
+        canBreedChance = Oysters.oystersConfig.getProperty(OysterConfigValues.MUTATION_CHANCE);
     }
 
     @Override
     public void tick() {
-        if (tickCounter >= getPearlGenTimer()) {
+        if (pearlGenCounter >= getPearlGenTimer()) {
             generateOyster();
-            tickCounter = 0;
+            pearlGenCounter = 0;
         }
-        if (tickBreedCounter >= tickBreedCheck) {
+        if (tickBreedCounter >= pearlMutateCheck) {
             attemptToBreedOysters();
             tickBreedCounter = 0;
         }
-        tickCounter++;
+        pearlGenCounter++;
         tickBreedCounter++;
     }
 
@@ -51,9 +56,9 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
     private double getPearlGenTimer() {
         if(inventory.get(0).getCount() > 0) {
             //tickcheck / (count * .6) so that its not a straight cut-in-half time for each oyster added
-            return tickCheck / ((double)inventory.get(0).getCount() * .6);
+            return pearlGenCheck / ((double)inventory.get(0).getCount() * .6);
         }
-        return tickCheck;
+        return pearlGenCheck;
     }
 
     private void generateOyster() {

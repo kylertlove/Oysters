@@ -26,5 +26,8 @@
   "block.oysters.glowstone_oyster": "Glowstone Oyster",
   "block.oysters.redstone_oyster": "Redstone Oyster",
   "block.oysters.ender_pearl_oyster": "Ender Pearl Oyster",
-  "block.oysters.oyster_basket": "Oyster Basket"
+  "block.oysters.oyster_basket": "Oyster Basket",
+  "oysters.tooltip.blemished": "Grade - Blemished",
+  "oysters.tooltip.clean": "Grade - Clean",
+  "oysters.tooltip.flawless": "Grade - Flawless"
 }

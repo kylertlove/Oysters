@@ -9,8 +9,8 @@ import net.nerds.oysters.pearls.OysterPearlManager;
 
 public enum OysterBreed {
     BLEMISHED("blemished_oyster", "blemished_oyster_container", "blemished_pearl", null, null),
-    CLEAN("clean_oyster", "clean_oyster_container", "clean_pearl", OysterPearlManager.CLEAN_PEARL, OysterTier.BLEMISHED),
-    FLAWLESS("flawless_oyster", "flawless_oyster_container", "flawless_pearl", OysterPearlManager.FLAWLESS_PEARL, OysterTier.CLEAN),
+    CLEAN("clean_oyster", "clean_oyster_container", "clean_pearl", OysterPearlManager.CLEAN_PEARL, null),
+    FLAWLESS("flawless_oyster", "flawless_oyster_container", "flawless_pearl", OysterPearlManager.FLAWLESS_PEARL, null),
     BONE_MEAL("bone_meal_oyster", "bone_meal_oyster_container", "bone_meal_pearl", Items.BONE_MEAL, OysterTier.BLEMISHED),
     COAL("coal_oyster", "coal_oyster_container", "coal_pearl", Items.COAL, OysterTier.BLEMISHED),
     IRON("iron_oyster", "iron_oyster_container", "iron_pearl", Items.IRON_INGOT, OysterTier.CLEAN),
@@ -34,7 +34,7 @@ public enum OysterBreed {
         identifier = new Identifier(Oysters.MODID, name);
         containerIdentifier = new Identifier(Oysters.MODID, containerName);
         oysterBlock = new OysterBlock();
-        oysterBlockItem = new OysterBlockItem(getOysterBlock(), new Item.Settings().group(Oysters.oysterGroup).maxCount(8));
+        oysterBlockItem = new OysterBlockItem(getOysterBlock(), new Item.Settings().group(Oysters.oysterGroup).maxCount(8), tier);
         oysterPearl = name.equalsIgnoreCase("clean_oyster") ? OysterPearlManager.CLEAN_PEARL :
                 name.equalsIgnoreCase("flawless_oyster") ? OysterPearlManager.FLAWLESS_PEARL : new OysterPearl(pearlName);
         this.resourceItem = resourceItem;

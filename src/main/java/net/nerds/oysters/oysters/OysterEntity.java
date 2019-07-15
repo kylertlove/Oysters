@@ -13,6 +13,8 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.Direction;
+import net.nerds.oysters.Oysters;
+import net.nerds.oysters.Utils.OysterConfigValues;
 
 import java.util.Iterator;
 
@@ -21,12 +23,13 @@ public class OysterEntity extends BlockEntity implements Tickable, SidedInventor
     public DefaultedList<ItemStack> inventory;
     private OysterBreed oysterBreed;
     private long ticksElapased = 0;
-    private long tickCheck = 1200;
+    private long tickCheck;
 
     public OysterEntity(BlockEntityType<?> blockEntityType, OysterBreed oysterBreed) {
         super(blockEntityType);
         inventory = DefaultedList.create(1, ItemStack.EMPTY);
         this.oysterBreed = oysterBreed;
+        tickCheck = Oysters.oystersConfig.getProperty(OysterConfigValues.BASE_OYSTER_TIME);
     }
 
     @Override

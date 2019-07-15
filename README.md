@@ -30,4 +30,4 @@ Minecraft Resource Generation Mod with Oysters
    
 
 
-testing seed for easily finding oysters naturally: -325571245114322553
+testing seed for easily finding oysters naturally: -385469119539272358
