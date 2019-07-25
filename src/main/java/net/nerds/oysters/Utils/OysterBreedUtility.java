@@ -48,7 +48,18 @@ public class OysterBreedUtility {
     }
 
     public static boolean isRightTierForBreeding(OysterBreed.OysterTier oysterTier, Item itemAttemptingToMutate) {
-        OysterBreed.OysterTier tierOfResource = getBreedByResourceItem(itemAttemptingToMutate).getOysterTier();
+        OysterBreed breed = getBreedByResourceItem(itemAttemptingToMutate);
+        OysterBreed.OysterTier tierOfResource;
+        /**
+         * When trying to breed higher tier oysters, assign the lower tier to equate
+         */
+        switch (breed) {
+            case CLEAN: tierOfResource = OysterBreed.OysterTier.BLEMISHED;
+            break;
+            case FLAWLESS: tierOfResource = OysterBreed.OysterTier.CLEAN;
+            break;
+            default: tierOfResource = breed.getOysterTier();
+        }
         return oysterTier == tierOfResource;
     }
 }

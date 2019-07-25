@@ -27,7 +27,7 @@ public class OysterEntity extends BlockEntity implements Tickable, SidedInventor
 
     public OysterEntity(BlockEntityType<?> blockEntityType, OysterBreed oysterBreed) {
         super(blockEntityType);
-        inventory = DefaultedList.create(1, ItemStack.EMPTY);
+        inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
         this.oysterBreed = oysterBreed;
         tickCheck = Oysters.oystersConfig.getProperty(OysterConfigValues.BASE_OYSTER_TIME);
     }
@@ -60,7 +60,7 @@ public class OysterEntity extends BlockEntity implements Tickable, SidedInventor
     @Override
     public void fromTag(CompoundTag nbt) {
         super.fromTag(nbt);
-        this.inventory = DefaultedList.create(1, ItemStack.EMPTY);
+        this.inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
         Inventories.fromTag(nbt, this.inventory);
     }
 
