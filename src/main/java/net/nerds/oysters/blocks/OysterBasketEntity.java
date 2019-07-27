@@ -32,7 +32,7 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
 
     public OysterBasketEntity(BlockEntityType blockEntityType) {
         super(blockEntityType);
-        inventory = DefaultedList.ofSize(maxStorage, ItemStack.EMPTY);
+        inventory = DefaultedList.create(maxStorage, ItemStack.EMPTY);
         pearlGenCheck = Oysters.oystersConfig.getProperty(OysterConfigValues.BASE_BASKET_PEARL_GEN_TIME);
         pearlMutateCheck = Oysters.oystersConfig.getProperty(OysterConfigValues.BASE_BASKET_MUTATE_TIME);
         canBreedChance = Oysters.oystersConfig.getProperty(OysterConfigValues.MUTATION_CHANCE);
@@ -133,7 +133,7 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
     @Override
     public void fromTag(CompoundTag nbt) {
         super.fromTag(nbt);
-        inventory = DefaultedList.ofSize(maxStorage, ItemStack.EMPTY);
+        inventory = DefaultedList.create(maxStorage, ItemStack.EMPTY);
         Inventories.fromTag(nbt, this.inventory);
     }
 
