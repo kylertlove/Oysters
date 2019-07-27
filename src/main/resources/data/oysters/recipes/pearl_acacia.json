@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "b  ",
+    "bb ",
+    "b  "
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:wood_pearl"
+    }
+  },
+  "result": {
+    "item": "minecraft:acacia_log",
+    "count": 4
+  }
+}

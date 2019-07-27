@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "sss",
+    "bbb",
+    "bbb"
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:dirt_pearl"
+    },
+    "s": {
+      "item": "minecraft:seagrass"
+    }
+  },
+  "result": {
+    "item": "minecraft:grass_block",
+    "count": 16
+  }
+}
