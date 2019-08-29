@@ -19,6 +19,7 @@ import net.nerds.oysters.oysters.OysterBreed;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Optional;
 
 public class OysterBasketEntity extends BlockEntity implements Tickable, SidedInventory {
 
@@ -64,8 +65,11 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
     private void generateOyster() {
         if (!world.isClient && world.getBlockState(this.pos).get(Properties.WATERLOGGED)) {
             if (!inventory.get(0).isEmpty()) {
-                OysterBreed oysterBreed = OysterBreedUtility.getBreedByBlockItem(inventory.get(0).getItem());
-                ItemStack itemStack = new ItemStack(oysterBreed.getOysterPearl());
+                Optional<OysterBreed> oysterBreed = OysterBreedUtility.getBreedByBlockItem(inventory.get(0).getItem());
+                if(!oysterBreed.isPresent()) {
+                    return;
+                }
+                ItemStack itemStack = new ItemStack(oysterBreed.get().getOysterPearl());
                 addItemToInventory(itemStack);
             }
         }
@@ -95,9 +99,12 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
                 //pray to rng gods for blessings
                 if (rngForBreeding(inventory.get(0).getCount())) {
                     //get the Oyster Breed from the spawning inventory
-                    OysterBreed oysterBreed = OysterBreedUtility.getBreedByBlockItem(inventory.get(0).getItem());
+                    Optional<OysterBreed> oysterBreed = OysterBreedUtility.getBreedByBlockItem(inventory.get(0).getItem());
+                    if(!oysterBreed.isPresent()) {
+                        return;
+                    }
                     //get the tier of the oyster you are attempting to breed/mutate
-                    OysterBreed.OysterTier breedingTier = OysterBreedUtility.getTierOfBreedForMutation(oysterBreed);
+                    OysterBreed.OysterTier breedingTier = OysterBreedUtility.getTierOfBreedForMutation(oysterBreed.get());
                     //is this attempting to mutate the oyster. And if it is, is it the right tiered oyster for that resource
                     if (!inventory.get(1).isEmpty() && OysterBreedUtility.isRightTierForBreeding(breedingTier, inventory.get(1).getItem())) {
                         //there is a shell and a resource... get the new shell of that resource
@@ -112,7 +119,7 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
                         }
                         //add the same breed if you are not trying to mutate
                     } else if (inventory.get(0).getCount() > 1 && inventory.get(1).isEmpty()) {
-                        addItemToInventory(new ItemStack(oysterBreed.getOysterBlockItem()));
+                        addItemToInventory(new ItemStack(oysterBreed.get().getOysterBlockItem()));
                     }
                 } else {
                     //rng gods failed you, remove a resource item
