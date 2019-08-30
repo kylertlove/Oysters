@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oysters:diamond_pearl",
+      "oysters:emerald_pearl",
+      "oysters:ender_pearl_pearl",
+      "oysters:gold_pearl",
+      "oysters:pearl_necklace"
+    ]
+  },
+  "criteria": {
+    "has_the_thing": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "oysters:flawless_pearl"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oysters:flawless_oyster"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_thing",
+      "has_the_recipe"
+    ]
+  ]
+}

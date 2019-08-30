@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "b  ",
+    "   ",
+    "   "
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:flawless_pearl_block"
+    }
+  },
+  "result": {
+    "item": "oysters:flawless_oyster",
+    "count": 4
+  }
+}

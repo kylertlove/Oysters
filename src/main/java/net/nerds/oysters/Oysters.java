@@ -2,12 +2,14 @@ package net.nerds.oysters;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.event.server.ServerTickCallback;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.nerds.oysters.Utils.OysterWorldGen;
 import net.nerds.oysters.Utils.OystersConfig;
 import net.nerds.oysters.blocks.OysterBlockManager;
+import net.nerds.oysters.items.OysterItemManager;
 import net.nerds.oysters.oysters.OysterBreed;
 import net.nerds.oysters.oysters.OystersManager;
 import net.nerds.oysters.pearls.OysterPearlManager;
@@ -27,6 +29,7 @@ public class Oysters implements ModInitializer {
 		OystersManager.init();
 		OysterPearlManager.init();
 		OysterBlockManager.init();
+		OysterItemManager.init();
 		OysterWorldGen.generate();
 	}
 

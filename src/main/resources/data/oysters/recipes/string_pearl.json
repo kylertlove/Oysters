@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "bbb",
+    "bbb",
+    "bbb"
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:string_pearl"
+    }
+  },
+  "result": {
+    "item": "minecraft:string",
+    "count": 8
+  }
+}

@@ -8,6 +8,7 @@ import net.nerds.oysters.pearls.OysterPearl;
 import net.nerds.oysters.pearls.OysterPearlManager;
 
 public enum OysterBreed {
+
     BLEMISHED("blemished_oyster", "blemished_oyster_container", "blemished_pearl", null, null),
     CLEAN("clean_oyster", "clean_oyster_container", "clean_pearl", OysterPearlManager.CLEAN_PEARL, null),
     FLAWLESS("flawless_oyster", "flawless_oyster_container", "flawless_pearl", OysterPearlManager.FLAWLESS_PEARL, null),
@@ -16,6 +17,9 @@ public enum OysterBreed {
     WOOD("wood_oyster", "wood_oyster_container", "wood_pearl", Items.OAK_LOG, OysterTier.BLEMISHED),
     DIRT("dirt_oyster", "dirt_oyster_container", "dirt_pearl", Items.DIRT, OysterTier.BLEMISHED),
     STONE("stone_oyster", "stone_oyster_container", "stone_pearl", Items.STONE, OysterTier.BLEMISHED),
+    STRING("string_oyster", "string_oyster_container", "string_pearl", Items.STRING, OysterTier.BLEMISHED),
+    SAND("sand_oyster", "sand_oyster_container", "sand_pearl", Items.SAND, OysterTier.BLEMISHED),
+    QUARTZ("quartz_oyster", "quartz_oyster_container", "quartz_pearl", Items.QUARTZ, OysterTier.CLEAN),
     IRON("iron_oyster", "iron_oyster_container", "iron_pearl", Items.IRON_INGOT, OysterTier.CLEAN),
     GOLD("gold_oyster", "gold_oyster_container", "gold_pearl", Items.GOLD_INGOT, OysterTier.FLAWLESS),
     DIAMOND("diamond_oyster", "diamond_oyster_container", "diamond_pearl", Items.DIAMOND, OysterTier.FLAWLESS),

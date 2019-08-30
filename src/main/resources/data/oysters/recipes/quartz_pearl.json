@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "bbb",
+    "bbb",
+    "bbb"
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:quartz_pearl"
+    }
+  },
+  "result": {
+    "item": "minecraft:quartz",
+    "count": 4
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oysters:flawless_pearl",
+      "oysters:glowstone_pearl",
+      "oysters:iron_pearl",
+      "oysters:lapis_pearl",
+      "oysters:redstone_pearl"
+    ]
+  },
+  "criteria": {
+    "has_the_thing": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "oysters:clean_pearl"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oysters:clean_oyster"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_thing",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "bb ",
+    "bb ",
+    "   "
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:blemished_pearl"
+    }
+  },
+  "result": {
+    "item": "oysters:blemished_pearl_block"
+  }
+}
