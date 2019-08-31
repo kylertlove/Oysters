@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "bbb",
+    "bCb",
+    "bbb"
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:clean_pearl"
+    },
+    "C": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "oysters:pearly_iron_ingot"
+  }
+}

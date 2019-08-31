@@ -19,11 +19,11 @@ import java.util.List;
 
 public class PearlNecklace extends Item {
 
-    private int cooldown = 500;
+    private int cooldown = 200;
     private int wait = 0;
 
     public PearlNecklace() {
-        super(new Item.Settings().group(Oysters.oysterGroup));
+        super(new Item.Settings().group(Oysters.oysterGroup).maxCount(1));
     }
 
     @Override

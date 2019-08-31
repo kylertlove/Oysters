@@ -2,12 +2,11 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "oysters:flawless_pearl",
-      "oysters:glowstone_pearl",
-      "oysters:iron_pearl",
-      "oysters:lapis_pearl",
-      "oysters:redstone_pearl",
-      "oysters:pearly_iron_ingot"
+      "oysters:pearly_iron_sword",
+      "oysters:pearly_iron_shovel",
+      "oysters:pearly_iron_axe",
+      "oysters:pearly_iron_pickaxe",
+      "oysters:pearly_shears"
     ]
   },
   "criteria": {
@@ -16,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "item": "oysters:clean_pearl"
+            "item": "oysters:pearly_iron_ingot"
           }
         ]
       }
@@ -24,7 +23,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "oysters:clean_oyster"
+        "recipe": "oysters:pearly_iron_ingot"
       }
     }
   },

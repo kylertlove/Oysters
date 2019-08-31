@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "bb ",
+    "bS ",
+    " S "
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:pearly_iron_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "oysters:pearly_iron_axe"
+  }
+}

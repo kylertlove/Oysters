@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    " b ",
+    " b ",
+    " S "
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:pearly_diamond"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "oysters:pearly_diamond_sword"
+  }
+}

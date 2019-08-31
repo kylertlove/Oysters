@@ -46,5 +46,16 @@
   "oysters.tooltip.clean": "Grade - Clean",
   "oysters.tooltip.flawless": "Grade - Flawless",
   "item.oysters.pearl_necklace": "Pearl Necklace",
+  "item.oysters.pearly_iron_ingot": "Pearly Iron Ingot",
+  "item.oysters.pearly_iron_sword": "Pearly Iron Sword",
+  "item.oysters.pearly_iron_shovel": "Pearly Iron Shovel",
+  "item.oysters.pearly_iron_axe": "Pearly Iron Axe",
+  "item.oysters.pearly_iron_pickaxe": "Pearly Iron Pickaxe",
+  "item.oysters.pearly_shears": "Pearly Shears",
+  "item.oysters.pearly_diamond": "Pearly Diamond",
+  "item.oysters.pearly_diamond_pickaxe": "Pearly Diamond Pickaxe",
+  "item.oysters.pearly_diamond_axe": "Pearly Diamond Axe",
+  "item.oysters.pearly_diamond_shovel": "Pearly Diamond Shovel",
+  "item.oysters.pearly_diamond_sword": "Pearly Diamond Sword",
   "oysters.tooltip.pearl-necklace": "Fashionable yet Functional.  Conduit Power when in inventory"
 }
