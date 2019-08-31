@@ -18,7 +18,7 @@ public class PearlyTools {
     public static PearlyShovel pearlyDiamondShovel = new PearlyShovel(PearlyToolMaterial.PEARLY_DIAMOND, 1.5F, -3.0F, OysterItemManager.getGroup());
     public static PearlyPickaxe pearlyDiamondPickaxe = new PearlyPickaxe(PearlyToolMaterial.PEARLY_DIAMOND, 1, -2.8F, OysterItemManager.getGroup());
 
-    private enum PearlyToolMaterial implements ToolMaterial {
+    public enum PearlyToolMaterial implements ToolMaterial {
 
         PEARLY_IRON(625, 6.5f, 2, 2, 20, OysterItemManager.pearlyIronIngot),
         PEARLY_DIAMOND(2048, 9.5f, 6, 3, 25, OysterItemManager.pearlyDiamond);

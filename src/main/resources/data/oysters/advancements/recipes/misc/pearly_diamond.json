@@ -5,7 +5,11 @@
       "oysters:pearly_diamond_sword",
       "oysters:pearly_diamond_shovel",
       "oysters:pearly_diamond_axe",
-      "oysters:pearly_diamond_pickaxe"
+      "oysters:pearly_diamond_pickaxe",
+      "oysters:pearly_diamond_helmet",
+      "oysters:pearly_diamond_chestplate",
+      "oysters:pearly_diamond_leggings",
+      "oysters:pearly_diamond_boots"
     ]
   },
   "criteria": {

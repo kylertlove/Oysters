@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "   ",
+    "bbb",
+    "b b"
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:pearly_diamond"
+    }
+  },
+  "result": {
+    "item": "oysters:pearly_diamond_helmet"
+  }
+}

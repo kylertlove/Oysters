@@ -57,5 +57,13 @@
   "item.oysters.pearly_diamond_axe": "Pearly Diamond Axe",
   "item.oysters.pearly_diamond_shovel": "Pearly Diamond Shovel",
   "item.oysters.pearly_diamond_sword": "Pearly Diamond Sword",
+  "item.oysters.pearly_diamond_helmet": "Pearly Diamond Helmet",
+  "item.oysters.pearly_diamond_chestplate": "Pearly Diamond Chestplate",
+  "item.oysters.pearly_diamond_leggings": "Pearly Diamond Leggings",
+  "item.oysters.pearly_diamond_boots": "Pearly Diamond Boots",
+  "item.oysters.pearly_iron_helmet": "Pearly Iron Helmet",
+  "item.oysters.pearly_iron_chestplate": "Pearly Iron Chestplate",
+  "item.oysters.pearly_iron_leggings": "Pearly Iron Leggings",
+  "item.oysters.pearly_iron_boots": "Pearly Iron Boots",
   "oysters.tooltip.pearl-necklace": "Fashionable yet Functional.  Conduit Power when in inventory"
 }

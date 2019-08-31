@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "b b",
+    "bbb",
+    "bbb"
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:pearly_iron_ingot"
+    }
+  },
+  "result": {
+    "item": "oysters:pearly_iron_chestplate"
+  }
+}

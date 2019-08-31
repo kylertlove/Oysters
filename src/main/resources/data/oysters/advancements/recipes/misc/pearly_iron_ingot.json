@@ -6,7 +6,11 @@
       "oysters:pearly_iron_shovel",
       "oysters:pearly_iron_axe",
       "oysters:pearly_iron_pickaxe",
-      "oysters:pearly_shears"
+      "oysters:pearly_shears",
+      "oysters:pearly_iron_helmet",
+      "oysters:pearly_iron_chestplate",
+      "oysters:pearly_iron_leggings",
+      "oysters:pearly_iron_boots"
     ]
   },
   "criteria": {
