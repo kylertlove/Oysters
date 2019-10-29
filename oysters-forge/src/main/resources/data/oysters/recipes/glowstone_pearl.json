@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "bbb",
+    "bbb",
+    "bbb"
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:glowstone_pearl"
+    }
+  },
+  "result": {
+    "item": "minecraft:glowstone_dust",
+    "count": 2
+  }
+}

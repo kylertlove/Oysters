@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "b  ",
+    "   ",
+    "   "
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:clean_pearl_block"
+    }
+  },
+  "result": {
+    "item": "oysters:clean_pearl",
+    "count": 4
+  }
+}

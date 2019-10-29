@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "bbb",
+    "bbb",
+    "bbb"
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:bone_meal_pearl"
+    }
+  },
+  "result": {
+    "item": "minecraft:bone_meal",
+    "count": 4
+  }
+}

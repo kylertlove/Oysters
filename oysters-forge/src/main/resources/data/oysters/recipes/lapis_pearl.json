@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "bbb",
+    "bbb",
+    "bbb"
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:lapis_pearl"
+    }
+  },
+  "result": {
+    "item": "minecraft:lapis_lazuli",
+    "count": 4
+  }
+}

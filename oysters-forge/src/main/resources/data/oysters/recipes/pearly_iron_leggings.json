@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "bbb",
+    "b b",
+    "b b"
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:pearly_iron_ingot"
+    }
+  },
+  "result": {
+    "item": "oysters:pearly_iron_leggings"
+  }
+}
