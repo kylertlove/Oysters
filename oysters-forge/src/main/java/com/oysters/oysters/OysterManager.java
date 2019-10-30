@@ -1,19 +1,23 @@
 package com.oysters.oysters;
 
 import com.google.common.collect.Lists;
+import com.oysters.Oysters;
+import com.oysters.items.Pearl;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.tileentity.TileEntityType;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class OysterManager {
 
-	public static List<Oyster> oysterBlockList = buildOysterMap();
+	public static List<Oyster> oysterList = buildOysterMap();
+	public static List<Pearl> pearlList = buildPearlList();
 	public static TileEntityType<OysterTile> oysterTileTileEntityType = createTileEntityType();
 
 	/**
@@ -33,7 +37,7 @@ public class OysterManager {
 				new Oyster(defaultProps(), "string_oyster", OysterTier.CLEAN, "string_pearl", Items.STRING),
 				new Oyster(defaultProps(), "quartz_oyster", OysterTier.CLEAN, "quartz_pearl", Items.QUARTZ),
 				new Oyster(defaultProps(), "iron_oyster", OysterTier.CLEAN, "iron_pearl", Items.IRON_INGOT),
-				new Oyster(defaultProps(), "glowstone_oyster", OysterTier.CLEAN, "glowstone_pearl", Items.GLOWSTONE_DUST),
+				new Oyster(defaultProps().lightValue(14), "glowstone_oyster", OysterTier.CLEAN, "glowstone_pearl", Items.GLOWSTONE_DUST),
 				new Oyster(defaultProps(), "redstone_oyster", OysterTier.CLEAN, "redstone_pearl", Items.REDSTONE),
 				new Oyster(defaultProps(), "lapis_oyster", OysterTier.CLEAN, "lapis_pearl", Items.LAPIS_LAZULI),
 				new Oyster(defaultProps(), "gold_oyster", OysterTier.FLAWLESS, "gold_pearl", Items.GOLD_INGOT),
@@ -44,10 +48,18 @@ public class OysterManager {
 	}
 
 	private static Block.Properties defaultProps() {
-		return Block.Properties.create(Material.ROCK);
+		return Block.Properties.create(Material.ROCK)
+				.hardnessAndResistance(1.5F, 6.0F);
+	}
+
+
+	private static List<Pearl> buildPearlList() {
+		List<Pearl> l = new ArrayList<>();
+		oysterList.forEach(oyster -> l.add(new Pearl(oyster.getPearlName())));
+		return l;
 	}
 
 	private static TileEntityType<OysterTile> createTileEntityType() {
-		return TileEntityType.Builder.create(OysterTile::new, oysterBlockList.toArray(new Oyster[0])).build(null);
+		return TileEntityType.Builder.create(OysterTile::new, oysterList.toArray(new Oyster[0])).build(null);
 	}
 }

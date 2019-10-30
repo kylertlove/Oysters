@@ -1,5 +1,6 @@
 package com.oysters;
 
+import com.oysters.oysters.OysterManager;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -12,6 +13,6 @@ public class OystersItemGroup extends ItemGroup {
 
 	@Override
 	public ItemStack createIcon() {
-		return new ItemStack(Items.SHULKER_SHELL);
+		return new ItemStack(OysterManager.oysterList.get(0));
 	}
 }
