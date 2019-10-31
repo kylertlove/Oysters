@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    " i ",
+    " b ",
+    " s "
+  ],
+  "key": {
+    "b": {
+      "item": "oysters:blemished_oyster"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "oysters:oyster_shucker"
+  }
+}

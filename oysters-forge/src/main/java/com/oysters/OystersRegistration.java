@@ -2,6 +2,7 @@ package com.oysters;
 
 import com.oysters.OysterBasket.OysterBasket;
 import com.oysters.OysterBasket.OysterBasketTile;
+import com.oysters.items.OysterShucker;
 import com.oysters.oysters.Oyster;
 import com.oysters.oysters.OysterManager;
 import net.minecraft.block.Block;
@@ -18,8 +19,8 @@ import java.util.Objects;
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class OystersRegistration {
 
+    public static OysterShucker oysterShucker = new OysterShucker();
     public static OysterBasket oysterBasket = new OysterBasket();
-
     public static TileEntityType<OysterBasketTile> oysterBasketEntityType = buildBasketEntityType();
 
     @SubscribeEvent
@@ -38,6 +39,7 @@ public class OystersRegistration {
                 ));
         OysterManager.pearlList.forEach(item -> itemRegisterEvent.getRegistry().register(item));
         itemRegisterEvent.getRegistry().register(new BlockItem(oysterBasket, new Item.Properties().group(Oysters.oystersItemGroup)));
+        itemRegisterEvent.getRegistry().register(oysterShucker);
     }
 
     @SubscribeEvent
