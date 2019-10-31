@@ -18,7 +18,6 @@ public class OysterManager {
 
 	public static List<Oyster> oysterList = buildOysterMap();
 	public static List<Pearl> pearlList = buildPearlList();
-	public static TileEntityType<OysterTile> oysterTileTileEntityType = createTileEntityType();
 
 	/**
 	 * Build the oyster map.  eventually rip all this out and use API for someone else to add other oysters
@@ -59,7 +58,4 @@ public class OysterManager {
 		return l;
 	}
 
-	private static TileEntityType<OysterTile> createTileEntityType() {
-		return TileEntityType.Builder.create(OysterTile::new, oysterList.toArray(new Oyster[0])).build(null);
-	}
 }

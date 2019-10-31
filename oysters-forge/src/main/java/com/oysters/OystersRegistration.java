@@ -1,11 +1,14 @@
 package com.oysters;
 
+import com.oysters.OysterBasket.OysterBasket;
+import com.oysters.OysterBasket.OysterBasketTile;
+import com.oysters.oysters.Oyster;
 import com.oysters.oysters.OysterManager;
-import com.oysters.oysters.OysterTile;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -14,9 +17,15 @@ import java.util.Objects;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class OystersRegistration {
+
+    public static OysterBasket oysterBasket = new OysterBasket();
+
+    public static TileEntityType<OysterBasketTile> oysterBasketEntityType = buildBasketEntityType();
+
     @SubscribeEvent
     public static void blocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
         OysterManager.oysterList.forEach(oyster -> blockRegistryEvent.getRegistry().register(oyster));
+        blockRegistryEvent.getRegistry().register(oysterBasket);
     }
 
     @SubscribeEvent
@@ -28,14 +37,17 @@ public class OystersRegistration {
                         .setRegistryName(Objects.requireNonNull(oyster.getRegistryName()))
                 ));
         OysterManager.pearlList.forEach(item -> itemRegisterEvent.getRegistry().register(item));
+        itemRegisterEvent.getRegistry().register(new BlockItem(oysterBasket, new Item.Properties().group(Oysters.oystersItemGroup)));
     }
 
     @SubscribeEvent
     public static void tileRegistry(final RegistryEvent.Register<TileEntityType<?>> event) {
-        OysterManager.oysterList.forEach(oyster -> {
-            TileEntityType<?> type = TileEntityType.Builder.create(OysterTile::new).build(null);
-            type.setRegistryName(Objects.requireNonNull(oyster.getRegistryName()));
-            event.getRegistry().register(type);
-        });
+        event.getRegistry().register(oysterBasketEntityType);
+    }
+
+    private static TileEntityType<OysterBasketTile> buildBasketEntityType() {
+        TileEntityType<OysterBasketTile> type = TileEntityType.Builder.create(OysterBasketTile::new).build(null);
+        type.setRegistryName(new ResourceLocation(Oysters.ID, "oyster_basket_entity_type"));
+        return type;
     }
 }

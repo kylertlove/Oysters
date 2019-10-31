@@ -1,6 +1,7 @@
 package com.oysters.oysters;
 
 import com.oysters.Oysters;
+import com.oysters.items.OysterShucker;
 import com.oysters.items.Pearl;
 import com.oysters.utils.OysterStreamUtils;
 import net.minecraft.block.*;
@@ -42,7 +43,6 @@ public class Oyster extends Block implements IWaterLoggable {
 	private VoxelShape voxelShape = Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 
-	private OysterTile tile;
 	private String pearlName;
 	private Item mutationResource;
 	private OysterTier tier;
@@ -69,18 +69,6 @@ public class Oyster extends Block implements IWaterLoggable {
 	@Override
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
-	}
-
-	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
-
-	@Nullable
-	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		tile = new OysterTile();
-		return tile;
 	}
 
 	@Override
@@ -134,10 +122,8 @@ public class Oyster extends Block implements IWaterLoggable {
 	public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		if(worldIn.isRemote()) return true;
 		if(state.getBlock() instanceof Oyster) {
-			if(tile != null && tile.isHarvestable()) {
-				OysterStreamUtils.getPearlFromPearlName(this.getPearlName())
-						.ifPresent(pearl -> player.addItemStackToInventory(new ItemStack(pearl)));
-				tile.setHarvestable(false);
+			if(player.getHeldItemMainhand().getItem() instanceof OysterShucker) {
+
 			}
 			return true;
 		}
