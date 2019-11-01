@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "oysters:blemished_oyster",
+    "oysters:clean_oyster",
+    "oysters:flawless_oyster",
+    "oysters:bone_meal_oyster",
+    "oysters:coal_oyster",
+    "oysters:wood_oyster",
+    "oysters:dirt_oyster",
+    "oysters:stone_oyster",
+    "oysters:sand_oyster",
+    "oysters:string_oyster",
+    "oysters:quartz_oyster",
+    "oysters:iron_oyster",
+    "oysters:glowstone_oyster",
+    "oysters:redstone_oyster",
+    "oysters:lapis_oyster",
+    "oysters:gold_oyster",
+    "oysters:diamond_oyster",
+    "oysters:emerald_oyster",
+    "oysters:ender_pearl_oyster"
+  ]
+}
