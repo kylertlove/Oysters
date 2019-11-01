@@ -122,9 +122,14 @@ public class Oyster extends Block implements IWaterLoggable {
 	public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		if(worldIn.isRemote()) return true;
 		if(state.getBlock() instanceof Oyster) {
-			if(player.getHeldItemMainhand().getItem() instanceof OysterShucker) {
+			ItemStack shuck = player.getHeldItemMainhand();
+			if(shuck.getItem() instanceof OysterShucker) {
 				OysterStreamUtils.getPearlFromPearlName(this.getPearlName())
-						.ifPresent(pearl -> player.inventory.addItemStackToInventory(new ItemStack(pearl)));
+						.ifPresent(pearl -> {
+							player.inventory.addItemStackToInventory(new ItemStack(pearl));
+							shuck.attemptDamageItem(1, worldIn.rand, null);
+							worldIn.destroyBlock(pos, false);
+						});
 			}
 			return true;
 		}

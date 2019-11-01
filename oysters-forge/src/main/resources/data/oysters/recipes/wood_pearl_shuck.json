@@ -1,0 +1,10 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    { "item": "oysters:wood_oyster" },
+    { "item": "oysters:oyster_shucker" }
+  ],
+  "result": {
+    "item": "oysters:wood_pearl"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    { "item": "oysters:flawless_oyster" },
+    { "item": "oysters:oyster_shucker" }
+  ],
+  "result": {
+    "item": "oysters:flawless_pearl"
+  }
+}
