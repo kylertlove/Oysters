@@ -31,6 +31,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.extensions.IForgeBlockState;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nullable;
@@ -67,7 +68,7 @@ public class Oyster extends Block implements IWaterLoggable {
 	}
 
 	@Override
-	public BlockRenderLayer getRenderLayer() {
+	public BlockRenderType getRenderType() {
 		return BlockRenderLayer.CUTOUT;
 	}
 
