@@ -2,24 +2,20 @@ package com.oysters.oysters;
 
 import com.oysters.Oysters;
 import com.oysters.items.OysterShucker;
-import com.oysters.items.Pearl;
 import com.oysters.utils.OysterStreamUtils;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.DebugPacketSender;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
@@ -32,13 +28,8 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.extensions.IForgeBlockState;
-import net.minecraftforge.items.ItemHandlerHelper;
 
-import javax.annotation.Nullable;
-import javax.swing.text.html.BlockView;
-import java.util.Optional;
-
-public class Oyster extends Block implements IWaterLoggable {
+public class Oyster extends Block implements IWaterLoggable, IForgeBlockState {
 
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private VoxelShape voxelShape = Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);
@@ -65,11 +56,6 @@ public class Oyster extends Block implements IWaterLoggable {
 		this.setDefaultState(this.getStateContainer().getBaseState()
 				.with(WATERLOGGED, Boolean.TRUE)
 				.with(FACING, Direction.NORTH));
-	}
-
-	@Override
-	public BlockRenderType getRenderType() {
-		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
@@ -120,22 +106,41 @@ public class Oyster extends Block implements IWaterLoggable {
 	}
 
 	@Override
-	public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if(worldIn.isRemote()) return true;
-		if(state.getBlock() instanceof Oyster) {
-			ItemStack shuck = player.getHeldItemMainhand();
-			if(shuck.getItem() instanceof OysterShucker) {
-				OysterStreamUtils.getPearlFromPearlName(this.getPearlName())
-						.ifPresent(pearl -> {
-							player.inventory.addItemStackToInventory(new ItemStack(pearl));
-							shuck.attemptDamageItem(1, worldIn.rand, null);
-							worldIn.destroyBlock(pos, false);
-						});
+	public ActionResultType func_225533_a_(BlockState blockState, World world, BlockPos blockPos, PlayerEntity playerEntity, Hand hand, BlockRayTraceResult blockRayTraceResult) {
+
+		if(!world.isRemote()) {
+			if(blockState.getBlock() instanceof Oyster) {
+				ItemStack shuck = playerEntity.getHeldItemMainhand();
+				if(shuck.getItem() instanceof OysterShucker) {
+					OysterStreamUtils.getPearlFromPearlName(this.getPearlName())
+							.ifPresent(pearl -> {
+								playerEntity.inventory.addItemStackToInventory(new ItemStack(pearl));
+								shuck.attemptDamageItem(1, world.rand, null);
+								world.destroyBlock(blockPos, false);
+							});
+				}
 			}
-			return true;
 		}
-		return false;
+		return ActionResultType.PASS;
 	}
+
+//	@Override
+//	public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+//		if(worldIn.isRemote()) return true;
+//		if(state.getBlock() instanceof Oyster) {
+//			ItemStack shuck = player.getHeldItemMainhand();
+//			if(shuck.getItem() instanceof OysterShucker) {
+//				OysterStreamUtils.getPearlFromPearlName(this.getPearlName())
+//						.ifPresent(pearl -> {
+//							player.inventory.addItemStackToInventory(new ItemStack(pearl));
+//							shuck.attemptDamageItem(1, worldIn.rand, null);
+//							worldIn.destroyBlock(pos, false);
+//						});
+//			}
+//			return true;
+//		}
+//		return false;
+//	}
 
 	public String getPearlName() {
 		return pearlName;
