@@ -1,5 +1,6 @@
 package com.oysters;
 
+import com.oysters.utils.OysterGeneration;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -25,7 +26,7 @@ public class Oysters {
     }
 
     private void init(final FMLCommonSetupEvent event) {
-
+        OysterGeneration.oysterGen();
     }
 
     private void clientEvent(final FMLClientSetupEvent event) {
