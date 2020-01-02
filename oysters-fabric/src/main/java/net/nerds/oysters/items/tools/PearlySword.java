@@ -37,7 +37,7 @@ public class PearlySword extends SwordItem {
             if(entity instanceof PlayerEntity) {
                 boolean isInHand = ((PlayerEntity) entity).getEquippedStack(EquipmentSlot.MAINHAND).isItemEqualIgnoreDamage(itemStack);
                 if(entity.isInsideWaterOrRain() && isInHand) {
-                    ((PlayerEntity) entity).addPotionEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 90, 1, false, false));
+                    ((PlayerEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 90, 1, false, false));
                 }
             }
             wait = 0;

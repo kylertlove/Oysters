@@ -31,7 +31,7 @@ public class PearlNecklace extends Item {
         wait++;
         if(wait > cooldown){
             if(entity instanceof PlayerEntity) {
-                ((PlayerEntity) entity).addPotionEffect(new StatusEffectInstance(StatusEffects.CONDUIT_POWER, 600, 0, false, false));
+                ((PlayerEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.CONDUIT_POWER, 600, 0, false, false));
             }
             wait = 0;
         }

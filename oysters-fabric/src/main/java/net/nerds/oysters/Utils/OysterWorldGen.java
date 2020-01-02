@@ -1,5 +1,6 @@
 package net.nerds.oysters.Utils;
 
+import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -10,15 +11,20 @@ import net.nerds.oysters.oysters.OysterBreed;
 
 public class OysterWorldGen {
     public static void generate() {
-        for (Biome biome : Registry.BIOME) {
+
+        Registry.BIOME.forEach(OysterWorldGen::createOysterFeature);
+
+        RegistryEntryAddedCallback.event(Registry.BIOME).register((i, identifier, biome) -> createOysterFeature(biome));
+    }
+
+    public static void createOysterFeature(Biome biome) {
             if (biome.getCategory() == Biome.Category.OCEAN) {
-                biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(
-                        new OysterGenerationFeature(DefaultFeatureConfig::deserialize, OysterBreed.BLEMISHED.getOysterBlock().getDefaultState()),
-                        FeatureConfig.DEFAULT,
-                        Decorator.COUNT_HEIGHTMAP_DOUBLE,
-                        new CountDecoratorConfig(1)
-                ));
+
+                biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                        new ConfiguredFeature(
+                                new OysterGenerationFeature(DefaultFeatureConfig::deserialize, OysterBreed.BLEMISHED.getOysterBlock().getDefaultState()),
+                                FeatureConfig.DEFAULT
+                        ));
             }
         }
-    }
 }

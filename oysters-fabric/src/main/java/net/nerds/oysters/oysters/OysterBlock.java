@@ -11,7 +11,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.state.StateFactory;
+import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
@@ -24,8 +24,8 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.ViewableWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 
 public class OysterBlock extends Block implements Waterloggable, BlockEntityProvider {
 
@@ -38,7 +38,7 @@ public class OysterBlock extends Block implements Waterloggable, BlockEntityProv
         super(FabricBlockSettings.of(Material.STONE)
                 .strength(1.5F, 6.0F)
                 .build());
-        this.setDefaultState(getStateFactory().getDefaultState()
+        this.setDefaultState(getStateManager().getDefaultState()
                 .with(WATERLOGGED, true)
                 .with(FACING, Direction.NORTH));
     }
@@ -75,7 +75,7 @@ public class OysterBlock extends Block implements Waterloggable, BlockEntityProv
     }
 
     @Override
-    public boolean canPlaceAt(BlockState blockState_1, ViewableWorld viewableWorld_1, BlockPos blockPos_1) {
+    public boolean canPlaceAt(BlockState blockState_1, WorldView viewableWorld_1, BlockPos blockPos_1) {
         return viewableWorld_1.getBlockState(blockPos_1.down()).getBlock() == Blocks.SAND;
     }
 
@@ -95,7 +95,7 @@ public class OysterBlock extends Block implements Waterloggable, BlockEntityProv
     }
 
     @Override
-    protected void appendProperties(StateFactory.Builder<Block, BlockState> stateBuilder) {
+    protected void appendProperties(StateManager.Builder<Block, BlockState> stateBuilder) {
         stateBuilder.add(WATERLOGGED, FACING);
     }
 
@@ -124,12 +124,12 @@ public class OysterBlock extends Block implements Waterloggable, BlockEntityProv
     }
 
     @Override
-    public boolean activate(BlockState state, World world, BlockPos blockPos, PlayerEntity player, Hand hand, BlockHitResult blockHitResult) {
-        if (!world.isClient) {
+    public ActionResult onUse(BlockState blockState_1, World world_1, BlockPos blockPos_1, PlayerEntity playerEntity_1, Hand hand_1, BlockHitResult blockHitResult_1) {
+        if (!world_1.isClient) {
             ContainerProviderRegistry.INSTANCE.openContainer(
                     oysterBreed.getContainerIdentifier(),
-                    player, buf -> buf.writeBlockPos(blockPos));
+                    playerEntity_1, buf -> buf.writeBlockPos(blockPos_1));
         }
-        return true;
+        return ActionResult.PASS;
     }
 }
