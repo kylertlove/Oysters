@@ -1,6 +1,9 @@
 package com.oysters;
 
+import com.oysters.oysters.OysterManager;
 import com.oysters.utils.OysterGeneration;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -30,5 +33,6 @@ public class Oysters {
     }
 
     private void clientEvent(final FMLClientSetupEvent event) {
+        //RenderTypeLookup.setRenderLayer(OysterManager.oysterList.get(0), RenderType.func_228641_d_());
     }
 }
