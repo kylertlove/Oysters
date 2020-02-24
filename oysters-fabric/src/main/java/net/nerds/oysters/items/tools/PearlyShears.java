@@ -2,10 +2,12 @@ package net.nerds.oysters.items.tools;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.render.debug.BeeDebugRenderer;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -34,6 +36,12 @@ public class PearlyShears extends ShearsItem {
         Block block = blockState.getBlock();
             if(block == Blocks.TALL_SEAGRASS) {
                 ItemScatterer.spawn(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), new ItemStack(Blocks.SEAGRASS, 2));
+            }
+            if(block instanceof BeehiveBlock) {
+                int i = blockState.get(BeehiveBlock.HONEY_LEVEL);
+                if(i > 0) {
+                    BeehiveBlock.dropHoneycomb(world, blockPos);
+                }
             }
             if(     (block.matches(BlockTags.CORAL_BLOCKS) || block.matches(BlockTags.CORAL_PLANTS)
                     || block == Blocks.COBWEB || block == Blocks.GRASS
