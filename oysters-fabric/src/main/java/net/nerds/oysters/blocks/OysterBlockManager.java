@@ -29,7 +29,7 @@ public class OysterBlockManager {
     public static final Identifier OYSTER_BASKET_CONTAINER_IDENTIFIER = new Identifier(Oysters.MODID, "oyster_basket_container");
 
     public static void init() {
-        OYSTER_BASKET_ENTITY_TYPE = Registry.register(Registry.BLOCK_ENTITY, new Identifier(Oysters.MODID, "oyster_basket"),
+        OYSTER_BASKET_ENTITY_TYPE = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(Oysters.MODID, "oyster_basket"),
                 BlockEntityType.Builder.create((Supplier<BlockEntity>) () -> {
                     return new OysterBasketEntity(OYSTER_BASKET_ENTITY_TYPE);
                 }, oysterBasket).build(null));

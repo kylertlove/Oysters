@@ -3,13 +3,13 @@ package net.nerds.oysters.blocks;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.gui.screen.ingame.AbstractContainerScreen;
+import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.nerds.oysters.Oysters;
 
 @Environment(EnvType.CLIENT)
-public class OysterBasketGui extends AbstractContainerScreen {
+public class OysterBasketGui extends ContainerScreen<OysterBasketContainer> {
 
     public Identifier fishGui = new Identifier(Oysters.MODID, "textures/gui/oyster_basket_gui.png");
     public OysterBasketEntity tile;

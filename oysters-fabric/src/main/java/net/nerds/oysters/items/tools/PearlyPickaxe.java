@@ -25,7 +25,7 @@ public class PearlyPickaxe extends PickaxeItem {
         if(wait > cooldown) {
             if(entity instanceof PlayerEntity) {
                 boolean isInHand = ((PlayerEntity) entity).getEquippedStack(EquipmentSlot.MAINHAND).isItemEqualIgnoreDamage(itemStack);
-                if(entity.isInsideWaterOrRain() && isInHand) {
+                if(entity.isTouchingWaterOrRain() && isInHand) {
                     ((PlayerEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, 90, 1, false, false));
                 }
             }

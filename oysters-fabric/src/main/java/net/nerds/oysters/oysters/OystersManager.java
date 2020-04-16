@@ -25,7 +25,7 @@ public class OystersManager {
 
                     //Entity builds
                     oysterEntityTypeMap.put(oysterBreed.getIdentifier(),
-                            Registry.register(Registry.BLOCK_ENTITY, oysterBreed.getIdentifier(),
+                            Registry.register(Registry.BLOCK_ENTITY_TYPE, oysterBreed.getIdentifier(),
                                     BlockEntityType.Builder.create((Supplier<BlockEntity>) () -> {
                                                 return new OysterEntity(oysterEntityTypeMap.get(oysterBreed.getIdentifier()), oysterBreed);
                                             },

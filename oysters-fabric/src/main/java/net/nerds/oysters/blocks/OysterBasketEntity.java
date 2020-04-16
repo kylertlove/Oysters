@@ -16,6 +16,7 @@ import net.nerds.oysters.Utils.OysterBreedUtility;
 import net.nerds.oysters.Utils.OysterConfigValues;
 import net.nerds.oysters.oysters.OysterBlockItem;
 import net.nerds.oysters.oysters.OysterBreed;
+import net.nerds.oysters.pearls.OysterPearl;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -216,12 +217,14 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
     @Override
     public boolean canInsertInvStack(int i, ItemStack itemStack, Direction direction) {
         return (i == 0 && itemStack.getItem() instanceof OysterBlockItem) ||
+                (i > 1 && itemStack.getItem() instanceof OysterBlockItem) ||
+                (i > 1 && itemStack.getItem() instanceof OysterPearl) ||
                 (i == 1 && OysterBreedUtility.isAResource(itemStack.getItem()));
     }
 
     @Override
     public boolean canExtractInvStack(int i, ItemStack itemStack, Direction direction) {
-        if (direction == Direction.DOWN && i > 0) {
+        if (direction == Direction.DOWN && i > 1) {
             return true;
         }
         return false;

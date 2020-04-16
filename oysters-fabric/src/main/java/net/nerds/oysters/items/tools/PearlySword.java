@@ -36,7 +36,7 @@ public class PearlySword extends SwordItem {
         if(wait > cooldown) {
             if(entity instanceof PlayerEntity) {
                 boolean isInHand = ((PlayerEntity) entity).getEquippedStack(EquipmentSlot.MAINHAND).isItemEqualIgnoreDamage(itemStack);
-                if(entity.isInsideWaterOrRain() && isInHand) {
+                if(entity.isTouchingWaterOrRain() && isInHand) {
                     ((PlayerEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 90, 1, false, false));
                 }
             }
@@ -88,7 +88,7 @@ public class PearlySword extends SwordItem {
         float_4 *= float_7 / float_6;
         float_5 *= float_7 / float_6;
         playerEntity.addVelocity((double)float_3, (double)float_4, (double)float_5);
-        playerEntity.method_6018(20);
+        playerEntity.setPushCooldown(20);
         if (playerEntity.onGround) {
             float float_8 = 1.1999999F;
             playerEntity.move(MovementType.SELF, new Vec3d(0.0D, 1.1999999284744263D, 0.0D));

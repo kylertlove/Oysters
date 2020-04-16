@@ -63,7 +63,7 @@ public class OysterBasketContainer extends Container {
     }
 
     public ItemStack transferSlot(PlayerEntity player, int slotIndex) {
-        Slot initSlot = this.slotList.get(slotIndex);
+        Slot initSlot = this.slots.get(slotIndex);
         if (initSlot.getStack() == ItemStack.EMPTY) {
             return ItemStack.EMPTY;
         }
@@ -71,8 +71,8 @@ public class OysterBasketContainer extends Container {
 
         if (initSlot.inventory == player.inventory) {
             ItemStack clickedItem = initSlot.getStack();
-            Slot oysterInputSlot = this.slotList.get(0);
-            Slot resourceInputSlot = this.slotList.get(1);
+            Slot oysterInputSlot = this.slots.get(0);
+            Slot resourceInputSlot = this.slots.get(1);
             if(clickedItem.getItem() instanceof OysterBlockItem && !oysterInputSlot.hasStack()) {
                 oysterInputSlot.setStack(clickedItem);
                 initSlot.setStack(ItemStack.EMPTY);

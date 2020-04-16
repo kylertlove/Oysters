@@ -38,7 +38,7 @@ public class OysterContainer extends Container {
 
     @Override
     public ItemStack transferSlot(PlayerEntity player, int slotIndex) {
-        Slot initSlot = this.slotList.get(slotIndex);
+        Slot initSlot = this.slots.get(slotIndex);
         if (initSlot.getStack() == ItemStack.EMPTY) {
             return ItemStack.EMPTY;
         }
