@@ -21,7 +21,7 @@ import java.util.function.Supplier;
 public class OysterBlockManager {
 
     public static OysterBasket oysterBasket =
-            new OysterBasket(FabricBlockSettings.of(Material.WOOD).strength(2.0F, 2.0f).sounds(BlockSoundGroup.WOOD).build());
+            new OysterBasket(FabricBlockSettings.of(Material.WOOD).strength(2.0F, 2.0f).sounds(BlockSoundGroup.WOOD).build().nonOpaque());
     public static Block blemishedPearlBlock = new Block(Block.Settings.of(Material.STONE, MaterialColor.STONE).strength(1.5F, 6.0F));
     public static Block cleanPearlBlock = new Block(Block.Settings.of(Material.STONE, MaterialColor.STONE).strength(1.5F, 6.0F));
     public static Block flawlessPearlBlock = new Block(Block.Settings.of(Material.STONE, MaterialColor.STONE).strength(1.5F, 6.0F));
