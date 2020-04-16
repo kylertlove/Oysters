@@ -2,19 +2,18 @@ package net.nerds.oysters.items.tools;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.client.render.debug.BeeDebugRenderer;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -37,16 +36,7 @@ public class PearlyShears extends ShearsItem {
             if(block == Blocks.TALL_SEAGRASS) {
                 ItemScatterer.spawn(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), new ItemStack(Blocks.SEAGRASS, 2));
             }
-            if(block instanceof BeehiveBlock) {
-                int i = blockState.get(BeehiveBlock.HONEY_LEVEL);
-                if(i > 0) {
-                    BeehiveBlock.dropHoneycomb(world, blockPos);
-                }
-            }
             if(     (block.matches(BlockTags.CORAL_BLOCKS) || block.matches(BlockTags.CORAL_PLANTS)
-                    || block == Blocks.COBWEB || block == Blocks.GRASS
-                    || block == Blocks.FERN || block == Blocks.DEAD_BUSH
-                    || block == Blocks.VINE || block == Blocks.TRIPWIRE
                     || block == Blocks.SEAGRASS || block == Blocks.TALL_SEAGRASS
                     || block.matches(BlockTags.WOOL) || block.matches(BlockTags.LEAVES)
                     || block.matches(BlockTags.CORALS) || block.matches(BlockTags.WALL_CORALS))) {
@@ -60,7 +50,7 @@ public class PearlyShears extends ShearsItem {
     public float getMiningSpeed(ItemStack itemStack, BlockState blockState) {
         Block block = blockState.getBlock();
         if(block.matches(BlockTags.CORAL_BLOCKS)) {
-            return 30.0f;
+            return 100.0f;
         }
         if (block != Blocks.COBWEB && !blockState.matches(BlockTags.LEAVES)
                 && !blockState.matches(BlockTags.WALL_CORALS) && !blockState.matches(BlockTags.CORALS)
@@ -74,5 +64,11 @@ public class PearlyShears extends ShearsItem {
     @Override
     public boolean isEnchantable(ItemStack itemStack_1) {
         return false;
+    }
+
+    @Override
+    @Environment(EnvType.CLIENT)
+    public void appendTooltip(ItemStack itemStack, World world, List<Text> list, TooltipContext tooltipContext) {
+        list.add(new TranslatableText("oysters.tooltip.shears").formatted(Formatting.AQUA));
     }
 }
