@@ -36,33 +36,33 @@ public class OysterBasket extends Block implements BlockEntityProvider {
     }
 
     @Override
-    public void onBlockRemoved(BlockState blockState_1, World world_1, BlockPos blockPos_1, BlockState blockState_2, boolean boolean_1) {
+    public void onStateReplaced(BlockState blockState_1, World world_1, BlockPos blockPos_1, BlockState blockState_2, boolean boolean_1) {
         if (blockState_1.getBlock() != blockState_2.getBlock()) {
             BlockEntity blockEntity_1 = world_1.getBlockEntity(blockPos_1);
             if (blockEntity_1 instanceof Inventory) {
                 ItemScatterer.spawn(world_1, blockPos_1, (Inventory)blockEntity_1);
-                world_1.updateHorizontalAdjacent(blockPos_1, this);
+                world_1.updateComparators(blockPos_1, this);
             }
-            super.onBlockRemoved(blockState_1, world_1, blockPos_1, blockState_2, boolean_1);
+            super.onStateReplaced(blockState_1, world_1, blockPos_1, blockState_2, boolean_1);
         }
     }
 
     @Override
-    public boolean onBlockAction(BlockState blockState_1, World world_1, BlockPos blockPos_1, int int_1, int int_2) {
-        super.onBlockAction(blockState_1, world_1, blockPos_1, int_1, int_2);
+    public boolean onSyncedBlockEvent(BlockState blockState_1, World world_1, BlockPos blockPos_1, int int_1, int int_2) {
+        super.onSyncedBlockEvent(blockState_1, world_1, blockPos_1, int_1, int_2);
         BlockEntity blockEntity_1 = world_1.getBlockEntity(blockPos_1);
-        return blockEntity_1 != null && blockEntity_1.onBlockAction(int_1, int_2);
+        return blockEntity_1 != null && blockEntity_1.onSyncedBlockEvent(int_1, int_2);
     }
 
-    /**
-     * Need to override because it is returning air on block break
-     * @return
-     */
-    @Override
-    public Identifier getDropTableId() {
-        Identifier identifier = Registry.BLOCK.getId(this);
-        return new Identifier(identifier.getNamespace(), "blocks/" + identifier.getPath());
-    }
+//    /**
+//     * Need to override because it is returning air on block break
+//     * @return
+//     */
+//    @Override
+//    public Identifier getLootTableId() {
+//        Identifier identifier = Registry.BLOCK.getId(this);
+//        return new Identifier(identifier.getNamespace(), "blocks/" + identifier.getPath());
+//    }
 
     @Override
     public BlockRenderType getRenderType(BlockState blockState_1) {
@@ -91,7 +91,7 @@ public class OysterBasket extends Block implements BlockEntityProvider {
     @Override
     public BlockState getPlacementState(ItemPlacementContext itemPlacementContext) {
         FluidState fluidState = itemPlacementContext.getWorld().getFluidState(itemPlacementContext.getBlockPos());
-        boolean waterLog = fluidState.matches(FluidTags.WATER) && fluidState.getLevel() == 8;
+        boolean waterLog = fluidState.isIn(FluidTags.WATER) && fluidState.getLevel() == 8;
         return super.getPlacementState(itemPlacementContext).with(WATERLOGGED, waterLog)
                 .with(FACING, itemPlacementContext.getPlayerFacing().getOpposite());
     }

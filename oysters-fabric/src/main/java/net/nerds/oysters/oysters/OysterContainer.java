@@ -1,22 +1,22 @@
 package net.nerds.oysters.oysters;
 
-import net.minecraft.container.Container;
-import net.minecraft.container.Slot;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.Generic3x3ContainerScreenHandler;
 import net.minecraft.world.World;
 import net.nerds.oysters.Utils.OutputSlot;
 
-public class OysterContainer extends Container {
+public class OysterContainer extends Generic3x3ContainerScreenHandler {
 
     public final Inventory inventory;
     public final PlayerInventory playerInventory;
     public final World world;
 
     public OysterContainer(int syncId, PlayerInventory playerInventory, Inventory inventory ) {
-        super(null, syncId);
+        super(syncId, playerInventory, inventory);
         this.inventory = inventory;
         this.playerInventory = playerInventory;
         this.world = playerInventory.player.world;
@@ -57,7 +57,7 @@ public class OysterContainer extends Container {
 
     @Override
     public boolean canUse(PlayerEntity playerEntity) {
-        return this.inventory.canPlayerUseInv(playerEntity);
+        return this.inventory.canPlayerUse(playerEntity);
     }
 
     public Inventory getInventory() {

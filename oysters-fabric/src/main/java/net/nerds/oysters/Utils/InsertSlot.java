@@ -1,6 +1,6 @@
 package net.nerds.oysters.Utils;
 
-import net.minecraft.container.Slot;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

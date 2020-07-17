@@ -36,10 +36,10 @@ public class PearlyShears extends ShearsItem {
             if(block == Blocks.TALL_SEAGRASS) {
                 ItemScatterer.spawn(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), new ItemStack(Blocks.SEAGRASS, 2));
             }
-            if(     (block.matches(BlockTags.CORAL_BLOCKS) || block.matches(BlockTags.CORAL_PLANTS)
+            if(     (block.isIn(BlockTags.CORAL_BLOCKS) || block.isIn(BlockTags.CORAL_PLANTS)
                     || block == Blocks.SEAGRASS || block == Blocks.TALL_SEAGRASS
-                    || block.matches(BlockTags.WOOL) || block.matches(BlockTags.LEAVES)
-                    || block.matches(BlockTags.CORALS) || block.matches(BlockTags.WALL_CORALS))) {
+                    || block.isIn(BlockTags.WOOL) || block.isIn(BlockTags.LEAVES)
+                    || block.isIn(BlockTags.CORALS) || block.isIn(BlockTags.WALL_CORALS))) {
                 ItemScatterer.spawn(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), new ItemStack(block));
                 return true;
             }
@@ -47,15 +47,15 @@ public class PearlyShears extends ShearsItem {
     }
 
     @Override
-    public float getMiningSpeed(ItemStack itemStack, BlockState blockState) {
+    public float getMiningSpeedMultiplier(ItemStack itemStack, BlockState blockState) {
         Block block = blockState.getBlock();
-        if(block.matches(BlockTags.CORAL_BLOCKS)) {
+        if(block.isIn(BlockTags.CORAL_BLOCKS)) {
             return 100.0f;
         }
-        if (block != Blocks.COBWEB && !blockState.matches(BlockTags.LEAVES)
-                && !blockState.matches(BlockTags.WALL_CORALS) && !blockState.matches(BlockTags.CORALS)
-                && !blockState.matches(BlockTags.CORAL_PLANTS)) {
-            return (block.matches(BlockTags.WOOL)) ? 8.0F : super.getMiningSpeed(itemStack, blockState);
+        if (block != Blocks.COBWEB && !blockState.isIn(BlockTags.LEAVES)
+                && !blockState.isIn(BlockTags.WALL_CORALS) && !blockState.isIn(BlockTags.CORALS)
+                && !blockState.isIn(BlockTags.CORAL_PLANTS)) {
+            return (block.isIn(BlockTags.WOOL)) ? 8.0F : super.getMiningSpeedMultiplier(itemStack, blockState);
         } else {
             return 15.0F;
         }

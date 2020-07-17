@@ -1,7 +1,7 @@
 package net.nerds.oysters.blocks;
 
-import net.minecraft.container.Container;
-import net.minecraft.container.Slot;
+import net.minecraft.screen.Generic3x3ContainerScreenHandler;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -12,13 +12,13 @@ import net.nerds.oysters.Utils.OutputSlot;
 import net.nerds.oysters.Utils.OysterBreedUtility;
 import net.nerds.oysters.oysters.OysterBlockItem;
 
-public class OysterBasketContainer extends Container {
+public class OysterBasketContainer extends Generic3x3ContainerScreenHandler {
     public final Inventory inventory;
     public final PlayerInventory playerInventory;
     public final World world;
 
     public OysterBasketContainer(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        super(null, syncId);
+        super(syncId, playerInventory, inventory);
         this.inventory = inventory;
         this.playerInventory = playerInventory;
         this.world = playerInventory.player.world;
@@ -49,13 +49,13 @@ public class OysterBasketContainer extends Container {
 
     @Override
     public boolean canUse(PlayerEntity playerEntity_1) {
-        return this.inventory.canPlayerUseInv(playerEntity_1);
+        return this.inventory.canPlayerUse(playerEntity_1);
     }
 
     @Override
     public void close(PlayerEntity playerEntity_1) {
         super.close(playerEntity_1);
-        this.inventory.onInvClose(playerEntity_1);
+        this.inventory.onClose(playerEntity_1);
     }
 
     public Inventory getInventory() {
