@@ -1,5 +1,6 @@
 package net.nerds.oysters.blocks;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -8,8 +9,8 @@ import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Tickable;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
 import net.nerds.oysters.Oysters;
 import net.nerds.oysters.Utils.OysterBreedUtility;
@@ -139,8 +140,8 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
     }
 
     @Override
-    public void fromTag(CompoundTag nbt) {
-        super.fromTag(nbt);
+    public void fromTag(BlockState state, CompoundTag nbt) {
+        super.fromTag(state, nbt);
         inventory = DefaultedList.ofSize(maxStorage, ItemStack.EMPTY);
         Inventories.fromTag(nbt, this.inventory);
     }
@@ -153,12 +154,12 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
     }
 
     @Override
-    public int getInvSize() {
+    public int size() {
         return inventory.size();
     }
 
     @Override
-    public boolean isInvEmpty() {
+    public boolean isEmpty() {
         Iterator var1 = this.inventory.iterator();
         ItemStack itemStack_1;
         do {
@@ -171,28 +172,28 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
     }
 
     @Override
-    public ItemStack getInvStack(int i) {
+    public ItemStack getStack(int i) {
         return inventory.get(i);
     }
 
     @Override
-    public ItemStack takeInvStack(int i, int i1) {
+    public ItemStack removeStack(int i, int i1) {
         return Inventories.splitStack(this.inventory, i, i1);
     }
 
     @Override
-    public ItemStack removeInvStack(int i) {
+    public ItemStack removeStack(int i) {
         return Inventories.removeStack(inventory, i);
     }
 
     @Override
-    public void setInvStack(int i, ItemStack itemStack) {
+    public void setStack(int i, ItemStack itemStack) {
         inventory.set(i, itemStack);
         this.markDirty();
     }
 
     @Override
-    public boolean canPlayerUseInv(PlayerEntity playerEntity) {
+    public boolean canPlayerUse(PlayerEntity playerEntity) {
         if (this.world.getBlockEntity(this.pos) != this) {
             return false;
         } else {
@@ -206,7 +207,7 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
     }
 
     @Override
-    public int[] getInvAvailableSlots(Direction direction) {
+    public int[] getAvailableSlots(Direction direction) {
         int[] arr = new int[maxStorage];
         for (int i = 0; i < maxStorage; i++) {
             arr[i] = i;
@@ -215,7 +216,7 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
     }
 
     @Override
-    public boolean canInsertInvStack(int i, ItemStack itemStack, Direction direction) {
+    public boolean canInsert(int i, ItemStack itemStack, Direction direction) {
         return (i == 0 && itemStack.getItem() instanceof OysterBlockItem) ||
                 (i > 1 && itemStack.getItem() instanceof OysterBlockItem) ||
                 (i > 1 && itemStack.getItem() instanceof OysterPearl) ||
@@ -223,7 +224,7 @@ public class OysterBasketEntity extends BlockEntity implements Tickable, SidedIn
     }
 
     @Override
-    public boolean canExtractInvStack(int i, ItemStack itemStack, Direction direction) {
+    public boolean canExtract(int i, ItemStack itemStack, Direction direction) {
         if (direction == Direction.DOWN && i > 1) {
             return true;
         }

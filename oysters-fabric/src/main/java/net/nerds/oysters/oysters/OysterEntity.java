@@ -1,5 +1,6 @@
 package net.nerds.oysters.oysters;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -8,8 +9,8 @@ import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Tickable;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
 import net.nerds.oysters.Oysters;
 import net.nerds.oysters.Utils.OysterConfigValues;
@@ -56,8 +57,8 @@ public class OysterEntity extends BlockEntity implements Tickable, SidedInventor
     }
 
     @Override
-    public void fromTag(CompoundTag nbt) {
-        super.fromTag(nbt);
+    public void fromTag(BlockState state, CompoundTag nbt) {
+        super.fromTag(state, nbt);
         this.inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
         Inventories.fromTag(nbt, this.inventory);
     }
@@ -70,17 +71,17 @@ public class OysterEntity extends BlockEntity implements Tickable, SidedInventor
     }
 
     @Override
-    public int[] getInvAvailableSlots(Direction direction) {
+    public int[] getAvailableSlots(Direction direction) {
         return new int[1];
     }
 
     @Override
-    public boolean canInsertInvStack(int i, ItemStack itemStack, Direction direction) {
+    public boolean canInsert(int i, ItemStack itemStack, Direction direction) {
         return false;
     }
 
     @Override
-    public boolean canExtractInvStack(int i, ItemStack itemStack, Direction direction) {
+    public boolean canExtract(int i, ItemStack itemStack, Direction direction) {
         if (direction == Direction.DOWN && i > 0) {
             return true;
         }
@@ -88,12 +89,12 @@ public class OysterEntity extends BlockEntity implements Tickable, SidedInventor
     }
 
     @Override
-    public int getInvSize() {
+    public int size() {
         return inventory.size();
     }
 
     @Override
-    public boolean isInvEmpty() {
+    public boolean isEmpty() {
         Iterator var1 = this.inventory.iterator();
         ItemStack itemStack_1;
         do {
@@ -106,28 +107,28 @@ public class OysterEntity extends BlockEntity implements Tickable, SidedInventor
     }
 
     @Override
-    public ItemStack getInvStack(int i) {
+    public ItemStack getStack(int i) {
         return inventory.get(i);
     }
 
     @Override
-    public ItemStack takeInvStack(int i, int i1) {
+    public ItemStack removeStack(int i, int i1) {
         return Inventories.splitStack(this.inventory, i, i1);
     }
 
     @Override
-    public ItemStack removeInvStack(int i) {
+    public ItemStack removeStack(int i) {
         return Inventories.removeStack(inventory, i);
     }
 
     @Override
-    public void setInvStack(int i, ItemStack itemStack) {
+    public void setStack(int i, ItemStack itemStack) {
         inventory.set(i, itemStack);
         this.markDirty();
     }
 
     @Override
-    public boolean canPlayerUseInv(PlayerEntity playerEntity) {
+    public boolean canPlayerUse(PlayerEntity playerEntity) {
         if (this.world.getBlockEntity(this.pos) != this) {
             return false;
         } else {

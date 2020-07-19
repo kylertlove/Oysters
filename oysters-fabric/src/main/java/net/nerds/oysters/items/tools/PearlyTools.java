@@ -45,7 +45,7 @@ public class PearlyTools {
         }
 
         @Override
-        public float getMiningSpeed() {
+        public float getMiningSpeedMultiplier() {
             return miningSpeed;
         }
 

@@ -89,7 +89,7 @@ public class PearlySword extends SwordItem {
         float_5 *= float_7 / float_6;
         playerEntity.addVelocity((double)float_3, (double)float_4, (double)float_5);
         playerEntity.setPushCooldown(20);
-        if (playerEntity.onGround) {
+        if (playerEntity.isOnGround()) {
             float float_8 = 1.1999999F;
             playerEntity.move(MovementType.SELF, new Vec3d(0.0D, 1.1999999284744263D, 0.0D));
         }
