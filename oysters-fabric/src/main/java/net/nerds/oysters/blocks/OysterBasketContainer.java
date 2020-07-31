@@ -1,24 +1,25 @@
 package net.nerds.oysters.blocks;
 
-import net.minecraft.screen.Generic3x3ContainerScreenHandler;
-import net.minecraft.screen.slot.Slot;
+import net.fabricmc.fabric.api.event.client.player.ClientPickBlockCallback;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.world.World;
 import net.nerds.oysters.Utils.InsertSlot;
 import net.nerds.oysters.Utils.OutputSlot;
 import net.nerds.oysters.Utils.OysterBreedUtility;
 import net.nerds.oysters.oysters.OysterBlockItem;
 
-public class OysterBasketContainer extends Generic3x3ContainerScreenHandler {
+public class OysterBasketContainer extends ScreenHandler {
     public final Inventory inventory;
     public final PlayerInventory playerInventory;
     public final World world;
 
     public OysterBasketContainer(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        super(syncId, playerInventory, inventory);
+        super(null, syncId);
         this.inventory = inventory;
         this.playerInventory = playerInventory;
         this.world = playerInventory.player.world;
@@ -92,6 +93,4 @@ public class OysterBasketContainer extends Generic3x3ContainerScreenHandler {
             }
         }
     }
-
-
 }

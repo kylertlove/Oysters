@@ -1,5 +1,6 @@
 package net.nerds.oysters.oysters;
 
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -9,14 +10,14 @@ import net.minecraft.screen.Generic3x3ContainerScreenHandler;
 import net.minecraft.world.World;
 import net.nerds.oysters.Utils.OutputSlot;
 
-public class OysterContainer extends Generic3x3ContainerScreenHandler {
+public class OysterContainer extends ScreenHandler {
 
     public final Inventory inventory;
     public final PlayerInventory playerInventory;
     public final World world;
 
     public OysterContainer(int syncId, PlayerInventory playerInventory, Inventory inventory ) {
-        super(syncId, playerInventory, inventory);
+        super(null, syncId);
         this.inventory = inventory;
         this.playerInventory = playerInventory;
         this.world = playerInventory.player.world;

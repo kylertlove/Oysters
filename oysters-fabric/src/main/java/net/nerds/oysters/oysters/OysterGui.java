@@ -4,13 +4,14 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.ingame.Generic3x3ContainerScreen;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.nerds.oysters.Oysters;
 
 @Environment(EnvType.CLIENT)
-public class OysterGui extends Generic3x3ContainerScreen {
+public class OysterGui extends HandledScreen<OysterContainer> {
 
     public Identifier fishGui = new Identifier(Oysters.MODID, "textures/gui/oyster_gui.png");
     public OysterEntity tile;
@@ -28,11 +29,16 @@ public class OysterGui extends Generic3x3ContainerScreen {
         super.init();
     }
 
+    @Override
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        super.render(matrices, mouseX, mouseY, delta);
+        this.drawMouseoverTooltip(matrices, mouseX, mouseY);
+    }
 
     @Override
     public void drawForeground(MatrixStack matrices, int int_1, int int_2) {
         this.textRenderer.draw(matrices, this.containerLabel, 8.0F, 6.0F, 4210752);
-        this.textRenderer.draw(matrices, this.playerInventory.getDisplayName(), (float)this.playerInventoryTitleX, (float)this.playerInventoryTitleY, 4210752);
+    //    this.textRenderer.draw(matrices, this.playerInventory.getDisplayName(), (float)this.playerInventoryTitleX, (float)this.playerInventoryTitleY, 4210752);
     }
 
     @Override
